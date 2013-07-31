@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "newUser.js",
+  "sourceRoot": "../../..",
+  "sources": [
+    "app/models/newUser.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,GAAA,EAAA;KAAA;oSAAA;;CAAA,CAAM,IAAM;CAEV;;;;;CAAA;;CAAA,EAAU,IAAV,GAAA;;CAAA,EAEY,MAAA,CAAZ;;CAFA,EAIQ,GAAR,GAAQ;;CAJR;;CAF2B,OAAQ;CAArC"
+}

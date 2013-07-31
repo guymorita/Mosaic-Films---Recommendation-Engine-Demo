@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "MovieList.js",
+  "sourceRoot": "../../..",
+  "sources": [
+    "app/models/MovieList.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,GAAA,EAAA;KAAA;oSAAA;;CAAA,CAAM,IAAM;CAEV;;;;;CAAA;;CAAA,EAAU,IAAV,QAAA;;CAAA,EAEY,MAAA,CAAZ;;CAFA,EAIQ,GAAR,GAAQ;;CAJR;;CAF6B,OAAQ;CAAvC"
+}

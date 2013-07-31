@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "RecommendationView.js",
+  "sourceRoot": "../../..",
+  "sources": [
+    "app/views/RecommendationView.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,GAAA,EAAA;KAAA;oSAAA;;CAAA,CAAM,IAAM;CAEV;;;;;CAAA;;CAAA,EAAY,MAAA,CAAZ;;CAAA;;CAFsC,OAAQ;CAAhD"
+}
