@@ -12,7 +12,43 @@
       return _ref;
     }
 
-    RecommendationView.prototype.initialize = function() {};
+    RecommendationView.prototype.template = '\
+      <div>\
+      <tbody>\
+      <table class="table table-hover">\
+      </table>\
+      </tbody>\
+      </div>\
+      ';
+
+    RecommendationView.prototype.initialize = function() {
+      var _this = this;
+      console.log(this.model.name);
+      return this.model.fetch({
+        error: function(model, response) {
+          return console.log('error model', model);
+        },
+        success: function(model, response) {
+          console.log('success model', model);
+          console.log('success res', response);
+          return _this.render(response);
+        }
+      });
+    };
+
+    RecommendationView.prototype.render = function(res) {
+      var index, movie, _results;
+      this.$el.append(this.template);
+      this.$el.append('<div>rendering</div>');
+      _results = [];
+      for (index in res) {
+        movie = res[index];
+        _results.push(this.$('.table').append('<tr><td>\
+        ' + Object.keys(movie)[0] + '</td><td>' + movie[Object.keys(movie)[0]] + '</td>\
+        </tr>'));
+      }
+      return _results;
+    };
 
     return RecommendationView;
 

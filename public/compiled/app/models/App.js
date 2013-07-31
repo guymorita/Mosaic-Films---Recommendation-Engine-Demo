@@ -13,8 +13,9 @@
     }
 
     App.prototype.initialize = function() {
-      var movieList;
-      return this.set('movieList', movieList = new MovieList());
+      var movieList, recommendationList;
+      this.set('movieList', movieList = new MovieList());
+      return this.set('recommendationList', recommendationList = new RecommendationList());
     };
 
     return App;

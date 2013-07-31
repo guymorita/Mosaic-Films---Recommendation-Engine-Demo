@@ -12,15 +12,20 @@
       return _ref;
     }
 
-    AppView.prototype.template = '<div class="container-fluid">\
+    AppView.prototype.sidebarTemplate = '<div class="container-fluid">\
       <div class="row">\
         <div id="sidebar" class="col-6 col-lg-4">\
           sidebar\
           testing\
         </div>\
+      </div>\
+    </div>';
+
+    AppView.prototype.recommendationTemplate = '<div class="container-fluid">\
+      <div class="row">\
         <div id="main" class="col-6 col-lg-8">\
-          body\
-          testing\
+        body\
+        testing\
         </div>\
       </div>\
     </div>';
@@ -28,13 +33,21 @@
     AppView.prototype.initialize = function() {
       var _this = this;
       this.render();
-      return this.movieView.on('userCreated', function() {
-        return alert('user created');
+      return this.movieView.on('userCreated', function(username) {
+        _this.$el.html('');
+        _this.$el.append(_this.recommendationTemplate);
+        _(_this.model.get('recommendationList')).extend({
+          name: username
+        });
+        _this.recommendationView = new RecommendationView({
+          model: _this.model.get('recommendationList')
+        });
+        return _this.$('#main').html(_this.recommendationView.el);
       });
     };
 
     AppView.prototype.render = function() {
-      this.$el.append(this.template);
+      this.$el.append(this.sidebarTemplate);
       this.movieView = new MovieListView({
         model: this.model.get('movieList')
       });

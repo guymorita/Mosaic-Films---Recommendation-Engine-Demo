@@ -50,20 +50,18 @@
       var newRatings, user,
         _this = this;
       newRatings = {};
+      this.username = this.$('input').val();
       this.$('select').each(function(value, key) {
         return newRatings[key.id] = key.value;
       });
       user = new newUser({
-        name: this.$('input').val(),
+        name: this.username,
         movies: newRatings
       });
       return user.save({}, {
         wait: true,
-        error: function(model, response) {
-          return console.log('error model', model);
-        },
+        error: function(model, response) {},
         success: function(model, response) {
-          console.log('success model', model);
           _this.toggle();
           return _this.userCreated();
         }
@@ -71,7 +69,7 @@
     };
 
     MovieListView.prototype.userCreated = function() {
-      return this.trigger('userCreated');
+      return this.trigger('userCreated', this.username);
     };
 
     MovieListView.prototype.render = function(res) {

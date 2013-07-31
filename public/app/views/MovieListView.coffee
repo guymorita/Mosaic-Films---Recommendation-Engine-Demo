@@ -30,24 +30,25 @@ class window.MovieListView extends Backbone.View
 
   newUser: ->
     newRatings = {}
+    @username = @$('input').val()
     @$('select').each (value, key) ->
       newRatings[key.id] = key.value
     user = new newUser({
-      name: @$('input').val(),
+      name: @username,
       movies: newRatings
       })
     user.save({}, {
       wait: true
       error: (model, response) =>
-        console.log('error model', model)
+        # console.log('error model', model)
       success: (model, response) =>
-        console.log('success model', model)
+        # console.log('success model', model)
         @toggle()
         @userCreated()
     })
 
   userCreated: ->
-    @trigger 'userCreated'
+    @trigger 'userCreated', @username
 
   render: (res) ->
     @$el.append @template

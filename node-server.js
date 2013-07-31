@@ -16,7 +16,12 @@ app.get('/importMovies', function(req, res){
 });
 
 app.get('/recommend', function(req, res){
+  // console.log(req.route);
+  // console.log(req.path);
+  // console.log('req query', req.query[':name']);
+  console.log(raccoon.models.useee, req.query[':name']);
   raccoon.recommendationForUser(raccoon.models.useee, req.query[':name'], function(rec){
+    console.log('rec', rec);
     res.send(rec);
   });
 });
@@ -39,8 +44,11 @@ app.post('/newUser', function(req, res){
   req.on('end', function(){
     chunk = JSON.parse(chunk);
     raccoon.models.buildMovieList(chunk, function(movieList){
-      raccoon.models.newUser(chunk.name, movieList);
-      res.send(204);
+      raccoon.models.newUser(chunk.name, movieList, function(){
+        raccoon.models.importLib(function(){
+          res.send(204);
+        });
+      });
     });
   });
   // console.log(res);
