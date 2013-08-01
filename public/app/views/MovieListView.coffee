@@ -29,10 +29,15 @@ class window.MovieListView extends Backbone.View
       this.trigger('expand')
 
   newUser: ->
-    newRatings = {}
+    newRatings = []
+    insertMovie = {}
     @username = @$('input').val()
     @$('select').each (value, key) ->
-      newRatings[key.id] = key.value
+      insertMovie['id'] = key.id
+      insertMovie['value'] = key.value
+      newRatings.push(insertMovie)
+      insertMovie = {}
+      # newRatings[key.id] = key.value
     user = new newUser({
       name: @username,
       movies: newRatings

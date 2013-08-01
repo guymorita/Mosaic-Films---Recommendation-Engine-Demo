@@ -47,12 +47,16 @@
     };
 
     MovieListView.prototype.newUser = function() {
-      var newRatings, user,
+      var insertMovie, newRatings, user,
         _this = this;
-      newRatings = {};
+      newRatings = [];
+      insertMovie = {};
       this.username = this.$('input').val();
       this.$('select').each(function(value, key) {
-        return newRatings[key.id] = key.value;
+        insertMovie['id'] = key.id;
+        insertMovie['value'] = key.value;
+        newRatings.push(insertMovie);
+        return insertMovie = {};
       });
       user = new newUser({
         name: this.username,
