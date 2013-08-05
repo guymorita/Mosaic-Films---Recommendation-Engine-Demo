@@ -10,17 +10,23 @@ var express = require('express'),
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/login', function(req, res){
+  raccoon.models.buildLoginObject(req.query[':username'], function(object){
+    res.send(object);
+  });
+});
+
 app.get('/importMovies', function(req, res){
   raccoon.models.importCSV(raccoon.models.importLib);
   res.send('SUCCESS: Movies Imported');
 });
 
 app.get('/recommend', function(req, res){
-  // console.log(req.route);
+  console.log('query', req.query[':id']);
   // console.log(req.path);
   // console.log('req query', req.query[':name']);
-  console.log(raccoon.models.useee, req.query[':name']);
-  raccoon.recommendationForUser(raccoon.models.useee, req.query[':name'], function(rec){
+  // console.log(raccoon.models.useee, req.query[':id']);
+  raccoon.stat.likedCount(req.query[':id'], function(rec){
     console.log('rec', rec);
     res.send(rec);
   });
