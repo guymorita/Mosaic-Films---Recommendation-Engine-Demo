@@ -12,7 +12,6 @@ class window.RecommendationView extends Backbone.View
   initialize: ->
     console.log @model.name
     @model.fetch(
-      # {data: ':name': @model.name}
       error: (model, response) =>
         console.log('error model', model)
       success: (model, response) =>

@@ -13,7 +13,8 @@
     }
 
     App.prototype.initialize = function() {
-      var movieList, recommendationList;
+      var loginInfo, movieList, recommendationList;
+      this.set('loginInfo', loginInfo = new LoginInfo());
       this.set('movieList', movieList = new MovieList());
       return this.set('recommendationList', recommendationList = new RecommendationList());
     };
