@@ -1,7 +1,7 @@
 class window.RecommendationList extends Backbone.Model
 
   url: ->
-    "/recommend/?:name=" + @name
+    "/newRating/?:userId=" + @userObj.userId + "&movie[id]=" + @idFetch + "&movie[like]=" + @likeFetch
 
   initialize: ->
 
