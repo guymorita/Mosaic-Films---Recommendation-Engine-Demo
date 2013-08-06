@@ -14,6 +14,8 @@
 
     RecommendationView.prototype.template = '\
       <div>\
+      <div id="container">\
+      </div>\
       <tbody>\
       <table class="table table-hover">\
       </table>\
@@ -22,8 +24,23 @@
       ';
 
     RecommendationView.prototype.initialize = function() {
+      this.oldMovies;
+      this.$el.append(this.template);
+      this.$('#container').isotope({
+        itemSelector: '.element',
+        animationEngine: 'jquery'
+      });
+      return setTimeout(function() {
+        return this.$('#container').isotope('reLayout');
+      }, 100);
+    };
+
+    RecommendationView.prototype.handleRating = function(ratingObject) {
       var _this = this;
-      console.log(this.model.name);
+      _(this.model).extend({
+        idFetch: ratingObject.id,
+        likeFetch: ratingObject.like
+      });
       return this.model.fetch({
         error: function(model, response) {
           return console.log('error model', model);
@@ -37,15 +54,21 @@
     };
 
     RecommendationView.prototype.render = function(res) {
-      var index, movie, _results;
-      this.$el.append(this.template);
-      this.$el.append('<div>rendering</div>');
+      var index, movieid, moviesToAdd, moviesToRemove, newMovie, removeMovie, _results;
+      console.log(res);
+      moviesToAdd = _.difference(res, this.oldMovies);
+      moviesToRemove = _.difference(this.oldMovies, res);
+      this.oldMovies = res;
+      for (index in moviesToAdd) {
+        movieid = moviesToAdd[index];
+        newMovie = $('<div class="element sprites ' + this.model.userObj.movieLookup[movieid].replace(/\s+/g, '').toLowerCase() + '">' + this.model.userObj.movieLookup[movieid] + '</div>');
+        this.$('#container').isotope('insert', newMovie);
+      }
       _results = [];
-      for (index in res) {
-        movie = res[index];
-        _results.push(this.$('.table').append('<tr><td>\
-        ' + Object.keys(movie)[0] + '</td><td>' + movie[Object.keys(movie)[0]] + '</td>\
-        </tr>'));
+      for (index in moviesToRemove) {
+        movieid = moviesToRemove[index];
+        removeMovie = this.$('.' + this.model.userObj.movieLookup[movieid].replace(/\s+/g, '').toLowerCase());
+        _results.push(this.$('#container').isotope('remove', removeMovie));
       }
       return _results;
     };

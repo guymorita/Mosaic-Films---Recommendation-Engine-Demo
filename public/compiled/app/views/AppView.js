@@ -12,17 +12,15 @@
       return _ref;
     }
 
-    AppView.prototype.sidebarTemplate = '<div class="container-fluid">\
+    AppView.prototype.loginTemplate = '<div class="panel">\
+    </div>';
+
+    AppView.prototype.recommendationTemplate = '<div class="container-fluid">\
       <div class="row">\
         <div id="sidebar" class="col-6 col-lg-4">\
           sidebar\
           testing\
         </div>\
-      </div>\
-    </div>';
-
-    AppView.prototype.recommendationTemplate = '<div class="container-fluid">\
-      <div class="row">\
         <div id="main" class="col-6 col-lg-8">\
         body\
         testing\
@@ -33,25 +31,50 @@
     AppView.prototype.initialize = function() {
       var _this = this;
       this.render();
-      return this.movieView.on('userCreated', function(username) {
+      return this.loginView.on('userInfoReceived', function(userObject) {
+        var index, movie, movieHash, user, userHash, _ref1, _ref2;
         _this.$el.html('');
-        _this.$el.append(_this.recommendationTemplate);
-        _(_this.model.get('recommendationList')).extend({
-          name: username
+        movieHash = {};
+        _ref1 = userObject.allMovies;
+        for (index in _ref1) {
+          movie = _ref1[index];
+          movieHash[movie._id] = movie.name;
+        }
+        userHash = {};
+        _ref2 = userObject.allUsers;
+        for (index in _ref2) {
+          user = _ref2[index];
+          userHash[user._id] = user.name;
+        }
+        userObject['movieLookup'] = movieHash;
+        userObject['userLookup'] = userHash;
+        _(_this.model.get('movieList')).extend({
+          userObj: userObject
         });
+        _(_this.model.get('recommendationList')).extend({
+          userObj: userObject
+        });
+        _this.$el.append(_this.recommendationTemplate);
+        _this.movieView = new MovieListView({
+          model: _this.model.get('movieList')
+        });
+        _this.$('#sidebar').html(_this.movieView.el);
         _this.recommendationView = new RecommendationView({
           model: _this.model.get('recommendationList')
         });
-        return _this.$('#main').html(_this.recommendationView.el);
+        _this.$('#main').html(_this.recommendationView.el);
+        return _this.movieView.on('newRating', function(ratingObject) {
+          return _this.recommendationView.handleRating(ratingObject);
+        });
       });
     };
 
     AppView.prototype.render = function() {
-      this.$el.append(this.sidebarTemplate);
-      this.movieView = new MovieListView({
-        model: this.model.get('movieList')
+      this.$el.append(this.loginTemplate);
+      this.loginView = new LoginView({
+        model: this.model.get('loginInfo')
       });
-      return this.$('#sidebar').html(this.movieView.el);
+      return this.$('.panel').html(this.loginView.el);
     };
 
     return AppView;

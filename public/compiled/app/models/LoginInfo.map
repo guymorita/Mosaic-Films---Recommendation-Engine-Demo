@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "LoginInfo.js",
+  "sourceRoot": "../../..",
+  "sources": [
+    "app/models/LoginInfo.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,GAAA,EAAA;KAAA;oSAAA;;CAAA,CAAM,IAAM;CAEV;;;;;CAAA;;CAAA,EAAA,MAAK;CACqB,EAAD,CAAC,SAAxB,OAAA;CADF,IAAK;;CAAL,EAGY,MAAA,CAAZ;;CAHA,EAKQ,GAAR,GAAQ;;CALR;;CAF6B,OAAQ;CAAvC"
+}

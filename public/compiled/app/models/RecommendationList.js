@@ -13,7 +13,7 @@
     }
 
     RecommendationList.prototype.url = function() {
-      return "/recommend/?:name=" + this.name;
+      return "/newRating/?:userId=" + this.userObj.userId + "&movie[id]=" + this.idFetch + "&movie[like]=" + this.likeFetch;
     };
 
     RecommendationList.prototype.initialize = function() {};

@@ -12,87 +12,41 @@
       return _ref;
     }
 
-    MovieListView.prototype.template = '\
-      <div class="input-group">\
-        <input type="text" class="form-control" placeholder="name">\
-      </div>\
-      <tbody>\
+    MovieListView.prototype.template = '<div><tbody>\
       <table class="table table-hover">\
       </table>\
-      </tbody>\
-      <button id="submitButton" type="submit" class="btn btn-primary">See Recommendations</button>\
-      ';
+    </tbody></div>';
 
     MovieListView.prototype.initialize = function() {
-      var _this = this;
-      return this.model.fetch({
-        success: function(collection, response, options) {
-          return _this.render(response);
-        }
-      });
+      return this.render();
     };
 
     MovieListView.prototype.events = {
-      "click #submitButton": 'newUser'
-    };
-
-    MovieListView.prototype.toggle = function() {
-      if (this.$el.is(':visible')) {
-        this.$el.hide();
-        return this.trigger('collapse');
-      } else {
-        this.$el.show();
-        return this.trigger('expand');
+      "click .btn": function(e) {
+        this.newRating(e.currentTarget.id, e.currentTarget.classList[0]);
+        return this.$('#' + e.currentTarget.id).hide('slow');
       }
     };
 
-    MovieListView.prototype.newUser = function() {
-      var insertMovie, newRatings, user,
-        _this = this;
-      newRatings = [];
-      insertMovie = {};
-      this.username = this.$('input').val();
-      this.$('select').each(function(value, key) {
-        insertMovie['id'] = key.id;
-        insertMovie['value'] = key.value;
-        newRatings.push(insertMovie);
-        return insertMovie = {};
-      });
-      user = new newUser({
-        name: this.username,
-        movies: newRatings
-      });
-      return user.save({}, {
-        wait: true,
-        error: function(model, response) {},
-        success: function(model, response) {
-          _this.toggle();
-          return _this.userCreated();
-        }
+    MovieListView.prototype.newRating = function(id, like) {
+      return this.trigger('newRating', {
+        id: id,
+        like: like
       });
     };
 
-    MovieListView.prototype.userCreated = function() {
-      return this.trigger('userCreated', this.username);
-    };
-
-    MovieListView.prototype.render = function(res) {
-      var index, movie, _results;
+    MovieListView.prototype.render = function() {
+      var index, movie, _ref1, _results;
       this.$el.append(this.template);
+      _ref1 = this.model.userObj.allMovies;
       _results = [];
-      for (index in res) {
-        movie = res[index];
-        _results.push(this.$('.table').append('<tr><td>\
-        ' + movie + '</td>\
+      for (index in _ref1) {
+        movie = _ref1[index];
+        _results.push(this.$('.table').append('<tr id="' + movie._id + '"><td>\
+        ' + movie.name + '</td>\
         <td>\
-        <select class="form-control input-small" id="' + index + '">\
-          <option></option>\
-          <option>1</option>\
-          <option>2</option>\
-          <option>3</option>\
-          <option>4</option>\
-          <option>5</option>\
-        </select>\
+        <button type="button" class="liked btn btn-success btn-mini" id="' + movie._id + '">Like</button>\
+        <button type="button" class="disliked btn btn-danger btn-mini" id="' + movie._id + '">Dislike</button>\
         </td>\
         </tr>'));
       }
