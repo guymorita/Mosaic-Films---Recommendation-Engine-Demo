@@ -1,73 +1,29 @@
 class window.MovieListView extends Backbone.View
 
-  template: '
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="name">
-      </div>
-      <tbody>
+  template:
+    '<div><tbody>
       <table class="table table-hover">
       </table>
-      </tbody>
-      <button id="submitButton" type="submit" class="btn btn-primary">See Recommendations</button>
-      '
+    </tbody></div>'
 
   initialize: ->
-    @model.fetch({
-      success: (collection, response, options) =>
-        @render(response)
-      })
+    @render()
 
   events:
-    "click #submitButton": 'newUser'
+    "click .btn": (e) ->
+      @newRating(e.currentTarget.id, e.currentTarget.classList[0])
+      @$('#'+e.currentTarget.id).hide('slow')
 
-  toggle: ->
-    if @$el.is(':visible')
-      @$el.hide()
-      this.trigger('collapse')
-    else
-      @$el.show()
-      this.trigger('expand')
+  newRating: (id, like) ->
+    @trigger 'newRating', {id: id, like:like}
 
-  newUser: ->
-    newRatings = []
-    insertMovie = {}
-    @username = @$('input').val()
-    @$('select').each (value, key) ->
-      insertMovie['id'] = key.id
-      insertMovie['value'] = key.value
-      newRatings.push(insertMovie)
-      insertMovie = {}
-      # newRatings[key.id] = key.value
-    user = new newUser({
-      name: @username,
-      movies: newRatings
-      })
-    user.save({}, {
-      wait: true
-      error: (model, response) =>
-        # console.log('error model', model)
-      success: (model, response) =>
-        # console.log('success model', model)
-        @toggle()
-        @userCreated()
-    })
-
-  userCreated: ->
-    @trigger 'userCreated', @username
-
-  render: (res) ->
+  render: ->
     @$el.append @template
-    for index, movie of res
-      @$('.table').append '<tr><td>
-        '+movie+'</td>
+    for index, movie of @model.userObj.allMovies
+      @$('.table').append '<tr id="'+movie._id+'"><td>
+        '+movie.name+'</td>
         <td>
-        <select class="form-control input-small" id="'+index+'">
-          <option></option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <button type="button" class="liked btn btn-success btn-mini" id="'+movie._id+'">Like</button>
+        <button type="button" class="disliked btn btn-danger btn-mini" id="'+movie._id+'">Dislike</button>
         </td>
         </tr>'
