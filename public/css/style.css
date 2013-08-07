@@ -96,7 +96,8 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   padding: 20px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
+/*  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;*/
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 13px;
   line-height: 1.7em;
   background: #2E2E2E;
@@ -109,7 +110,8 @@ h1, h2, h3, p, ul, ol, pre, dl {
 
 h1, h2, #super-list, .element, .tagline, #index-list,
 .super-list .link {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+/*  font-family: 'Helvetica Neue', Arial, sans-serif;*/
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 h1, h2, h3 { font-weight: bold; }
@@ -183,6 +185,11 @@ body {
   margin-bottom: 20px;
 }
 
+#powered{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
 .element {
   width: 110px;
   height: 110px;
@@ -191,11 +198,14 @@ body {
   overflow: hidden;
   position: relative;
   background: #888;
-  color: #222;
+  color: white;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.5);
   -webkit-border-top-right-radius: 1.2em;
       -moz-border-radius-topright: 1.2em;
           border-top-right-radius: 1.2em;
 }
+
+
 
 .element.alkali          { background: #F00; background: hsl(   0, 100%, 50%); }
 .element.alkaline-earth  { background: #F80; background: hsl(  36, 100%, 50%); }
@@ -247,6 +257,11 @@ body {
   color: hsla(0,0%,0%,.5);
   right: 0.5em;
   top: 0.5em;
+}
+
+.element .user {
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .variable-sizes .element.width2 { width: 230px; }
