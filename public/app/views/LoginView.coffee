@@ -22,6 +22,8 @@ class window.LoginView extends Backbone.View
       error: (model, response) =>
         console.log('model', model)
       success: (model, response) =>
+        # console.log('model', model)
+        # console.log('response', response)
         @userInfoReceived(response)
     )
 

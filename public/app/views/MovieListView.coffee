@@ -1,7 +1,9 @@
 class window.MovieListView extends Backbone.View
 
   template:
-    '<div><tbody>
+    '<div>
+    <h2>Mosaic Films</h2>
+    <tbody>
       <table class="table table-hover">
       </table>
     </tbody></div>'
@@ -19,7 +21,7 @@ class window.MovieListView extends Backbone.View
 
   render: ->
     @$el.append @template
-    for index, movie of @model.userObj.allMovies
+    for index, movie of _.shuffle(@model.userObj.allMovies)
       @$('.table').append '<tr id="'+movie._id+'"><td>
         '+movie.name+'</td>
         <td>

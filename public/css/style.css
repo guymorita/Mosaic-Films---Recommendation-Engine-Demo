@@ -99,7 +99,7 @@ body {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
   font-size: 13px;
   line-height: 1.7em;
-  background: #1F1E1D;
+  background: #2E2E2E;
   color: #FFF;
 }
 
@@ -166,6 +166,18 @@ body {
 }
 
 #container {
+  border: 1px solid #666;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+#similarity {
+  border: 1px solid #666;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+#toprated {
   border: 1px solid #666;
   padding: 5px;
   margin-bottom: 20px;

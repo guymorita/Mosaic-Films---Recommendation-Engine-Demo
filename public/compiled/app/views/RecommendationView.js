@@ -14,18 +14,22 @@
 
     RecommendationView.prototype.template = '\
       <div>\
+      <h2>Your Recommendations</h2>\
       <div id="container">\
       </div>\
-      <tbody>\
-      <table class="table table-hover">\
-      </table>\
-      </tbody>\
       </div>\
       ';
+
+    RecommendationView.prototype.topUsersTemplate = '<div class="topUsers">\
+    </div>';
+
+    RecommendationView.prototype.topRatedTemplate = '<div class="topRated">\
+    </div>';
 
     RecommendationView.prototype.initialize = function() {
       this.oldMovies;
       this.$el.append(this.template);
+      this.initialRender();
       this.$('#container').isotope({
         itemSelector: '.element',
         animationEngine: 'jquery'
@@ -53,24 +57,39 @@
       });
     };
 
+    RecommendationView.prototype.initialRender = function() {
+      this.$el.append(this.topUsersTemplate);
+      this.topUsersView = new TopUsersView({
+        model: this.model
+      });
+      this.$('.topUsers').html(this.topUsersView.el);
+      this.$el.append(this.topRatedTemplate);
+      this.topRatedView = new TopRatedView({
+        model: this.model
+      });
+      return this.$('.topRated').html(this.topRatedView.el);
+    };
+
     RecommendationView.prototype.render = function(res) {
-      var index, movieid, moviesToAdd, moviesToRemove, newMovie, removeMovie, _results;
+      var index, movieid, moviesToAdd, moviesToRemove, newMovie, removeMovie;
       console.log(res);
-      moviesToAdd = _.difference(res, this.oldMovies);
-      moviesToRemove = _.difference(this.oldMovies, res);
-      this.oldMovies = res;
+      this.topUsersView.reRender(res);
+      this.topRatedView.translateRes(res);
+      moviesToAdd = _.difference(res.recommendations, this.oldMovies);
+      moviesToRemove = _.difference(this.oldMovies, res.recommendations);
+      this.oldMovies = res.recommendations;
+      this.$('#container').isotope('shuffle');
       for (index in moviesToAdd) {
         movieid = moviesToAdd[index];
         newMovie = $('<div class="element sprites ' + this.model.userObj.movieLookup[movieid].replace(/\s+/g, '').toLowerCase() + '">' + this.model.userObj.movieLookup[movieid] + '</div>');
         this.$('#container').isotope('insert', newMovie);
       }
-      _results = [];
       for (index in moviesToRemove) {
         movieid = moviesToRemove[index];
         removeMovie = this.$('.' + this.model.userObj.movieLookup[movieid].replace(/\s+/g, '').toLowerCase());
-        _results.push(this.$('#container').isotope('remove', removeMovie));
+        this.$('#container').isotope('remove', removeMovie);
       }
-      return _results;
+      return this.$('#container').isotope('shuffle');
     };
 
     return RecommendationView;

@@ -44,3 +44,6 @@ class window.AppView extends Backbone.View
     @$el.append @loginTemplate
     @loginView = new LoginView(model: @model.get 'loginInfo')
     @$('.panel').html @loginView.el
+    # @$el.append @sidebarTemplate
+    # @movieView = new MovieListView(model: @model.get 'movieList')
+    # @$('#sidebar').html @movieView.el

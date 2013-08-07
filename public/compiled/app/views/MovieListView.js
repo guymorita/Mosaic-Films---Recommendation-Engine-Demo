@@ -12,7 +12,9 @@
       return _ref;
     }
 
-    MovieListView.prototype.template = '<div><tbody>\
+    MovieListView.prototype.template = '<div>\
+    <h2>Mosaic Films</h2>\
+    <tbody>\
       <table class="table table-hover">\
       </table>\
     </tbody></div>';
@@ -38,7 +40,7 @@
     MovieListView.prototype.render = function() {
       var index, movie, _ref1, _results;
       this.$el.append(this.template);
-      _ref1 = this.model.userObj.allMovies;
+      _ref1 = _.shuffle(this.model.userObj.allMovies);
       _results = [];
       for (index in _ref1) {
         movie = _ref1[index];
