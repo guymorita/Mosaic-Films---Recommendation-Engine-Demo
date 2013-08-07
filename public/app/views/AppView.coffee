@@ -1,7 +1,7 @@
 class window.AppView extends Backbone.View
 
   loginTemplate:
-    '<div class="panel">
+    '<div class="loginpage">
     </div>'
 
   recommendationTemplate:
@@ -16,6 +16,7 @@ class window.AppView extends Backbone.View
         testing
         </div>
       </div>
+      <div id="powered"><a href="https://github.com/guymorita/recommendationRaccoon" target="_blank">Powered by recommendationRaccoon (Node.js Module)</a></div>
     </div>'
 
   initialize: ->
@@ -43,7 +44,4 @@ class window.AppView extends Backbone.View
   render: ->
     @$el.append @loginTemplate
     @loginView = new LoginView(model: @model.get 'loginInfo')
-    @$('.panel').html @loginView.el
-    # @$el.append @sidebarTemplate
-    # @movieView = new MovieListView(model: @model.get 'movieList')
-    # @$('#sidebar').html @movieView.el
+    @$('.loginpage').html @loginView.el
