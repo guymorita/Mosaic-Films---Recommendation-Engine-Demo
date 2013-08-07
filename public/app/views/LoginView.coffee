@@ -1,12 +1,19 @@
 class window.LoginView extends Backbone.View
 
   template:
-    '<div class="panel-heading">
-      <h3 class="panel-title">Register or Login</h3>
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="name">
-          <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+    '<div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <h1>Mosaic Films</h1>
+        <div class="well">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="enter a new or existing username">
+            <span class="input-group-btn">
+              <button id="submitButton" class="btn btn-default" type="button">Go</button>
+            </span>
+          </div>
         </div>
+      <div class="col-lg-4"></div>
     </div>'
 
   initialize: ->
@@ -14,6 +21,12 @@ class window.LoginView extends Backbone.View
 
   events:
     "click #submitButton": 'getUser'
+    "keyup :input": 'checkEnter'
+
+  checkEnter: (e) ->
+    console.log(e)
+    if e.which is 13
+      @getUser()
 
   getUser: ->
     @username = @$('input').val()
