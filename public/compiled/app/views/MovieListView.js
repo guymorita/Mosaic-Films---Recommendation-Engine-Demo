@@ -15,7 +15,7 @@
     MovieListView.prototype.template = '<div>\
     <h2>Mosaic Films</h2>\
     <tbody>\
-      <table class="table table-hover">\
+      <table class="table">\
       </table>\
     </tbody></div>';
 
@@ -25,7 +25,9 @@
 
     MovieListView.prototype.events = {
       "click .btn": function(e) {
-        this.newRating(e.currentTarget.id, e.currentTarget.classList[0]);
+        if (e.currentTarget.classList[0] !== 'notseen') {
+          this.newRating(e.currentTarget.id, e.currentTarget.classList[0]);
+        }
         return this.$('#' + e.currentTarget.id).hide('slow');
       }
     };
@@ -47,8 +49,9 @@
         _results.push(this.$('.table').append('<tr id="' + movie._id + '"><td>\
         ' + movie.name + '</td>\
         <td>\
-        <button type="button" class="liked btn btn-success btn-mini" id="' + movie._id + '">Like</button>\
-        <button type="button" class="disliked btn btn-danger btn-mini" id="' + movie._id + '">Dislike</button>\
+        <button type="button" class="liked btn btn-success btn-xs" id="' + movie._id + '"><i class="icon-thumbs-up"></i></button>\
+        <button type="button" class="disliked btn btn-danger btn-xs" id="' + movie._id + '"><i class="icon-thumbs-down"></i></button>\
+        <button type="button" class="notseen btn btn-warning btn-xs" id="' + movie._id + '"><i class="icon-chevron-right"></i></button>\
         </td>\
         </tr>'));
       }

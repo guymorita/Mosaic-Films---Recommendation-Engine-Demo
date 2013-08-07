@@ -50,7 +50,6 @@
           return console.log('error model', model);
         },
         success: function(model, response) {
-          console.log('success model', model);
           console.log('success res', response);
           return _this.render(response);
         }
@@ -72,7 +71,6 @@
 
     RecommendationView.prototype.render = function(res) {
       var index, movieid, moviesToAdd, moviesToRemove, newMovie, removeMovie;
-      console.log(res);
       this.topUsersView.reRender(res);
       this.topRatedView.translateRes(res);
       moviesToAdd = _.difference(res.recommendations, this.oldMovies);

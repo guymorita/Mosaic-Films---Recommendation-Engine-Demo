@@ -12,7 +12,7 @@
       return _ref;
     }
 
-    AppView.prototype.loginTemplate = '<div class="panel">\
+    AppView.prototype.loginTemplate = '<div class="loginpage">\
     </div>';
 
     AppView.prototype.recommendationTemplate = '<div class="container-fluid">\
@@ -26,6 +26,7 @@
         testing\
         </div>\
       </div>\
+      <div id="powered"><a href="https://github.com/guymorita/recommendationRaccoon" target="_blank">Powered by recommendationRaccoon (Node.js Module)</a></div>\
     </div>';
 
     AppView.prototype.initialize = function() {
@@ -74,7 +75,7 @@
       this.loginView = new LoginView({
         model: this.model.get('loginInfo')
       });
-      return this.$('.panel').html(this.loginView.el);
+      return this.$('.loginpage').html(this.loginView.el);
     };
 
     return AppView;

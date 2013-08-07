@@ -14,7 +14,7 @@
 
     TopRatedView.prototype.template = '\
       <div>\
-      <h2>Most Similar to / Least Similar to</h2>\
+      <h2>Top Rated</h2>\
       <div id="toprated">\
       </div>\
       </div>\
@@ -33,29 +33,43 @@
     };
 
     TopRatedView.prototype.translateRes = function(res) {
-      return res.bestScores;
+      var index, value, _ref1;
+      this.scoreImport = res.bestScores;
+      this.movieArray = [];
+      this.scoreArray = [];
+      this.scoreLength = this.scoreImport.length;
+      _ref1 = this.scoreImport;
+      for (index in _ref1) {
+        value = _ref1[index];
+        if (index % 2 === 0) {
+          this.movieArray.push(value);
+        } else {
+          this.scoreArray.push(value);
+        }
+      }
+      return this.reRender();
     };
 
-    TopRatedView.prototype.reRender = function(res) {
-      var index, newUser, removeUser, topRatedToAdd, topRatedToRemove, userid;
-      console.log(res);
-      this.$('#toprated').isotope('shuffle');
-      topRatedToAdd = _.difference(res.bestRated, this.oldRated);
-      topRatedToRemove = _.difference(this.oldRated, res.bestRated);
-      this.oldRated = res.bestRated;
+    TopRatedView.prototype.reRender = function() {
+      var index, movieid, newMovie, removeMovie, topRatedToAdd, topRatedToRemove;
+      topRatedToAdd = _.difference(this.movieArray, this.oldRated);
+      topRatedToRemove = _.difference(this.oldRated, this.movieArray);
+      this.oldRated = this.movieArray;
       for (index in topRatedToAdd) {
-        userid = topRatedToAdd[index];
-        this.name = this.model.userObj.userLookup[userid] || 'newUser';
-        newUser = $('<div class="element metalloid ' + this.name.replace(/\s+/g, '').toLowerCase() + '">' + this.name + '</div>');
-        this.$('#toprated').isotope('insert', newUser);
+        movieid = topRatedToAdd[index];
+        this.movie = this.model.userObj.movieLookup[movieid] || 'newMovie';
+        newMovie = $('<div class="element sprites ' + this.movie.replace(/\s+/g, '').toLowerCase() + '">' + this.movie + '</br><div class="rating">' + this.scoreArray[index].substring(0, 4) + '</div></div>');
+        this.$('#toprated').isotope('insert', newMovie);
       }
       for (index in topRatedToRemove) {
-        userid = topRatedToRemove[index];
-        this.nameRemove = this.model.userObj.userLookup[userid] || 'newUser';
-        removeUser = this.$('.' + this.nameRemove.replace(/\s+/g, '').toLowerCase());
-        this.$('#toprated').isotope('remove', removeUser);
+        movieid = topRatedToRemove[index];
+        this.movieRemove = this.model.userObj.movieLookup[movieid] || 'newMovie';
+        removeMovie = this.$('.' + this.movieRemove.replace(/\s+/g, '').toLowerCase());
+        this.$('#toprated').isotope('remove', removeMovie);
       }
-      return this.$('#toprated').isotope('shuffle');
+      return this.$('#toprated').isotope({
+        sortBy: 'rating'
+      });
     };
 
     return TopRatedView;
