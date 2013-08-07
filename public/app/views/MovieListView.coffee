@@ -4,7 +4,7 @@ class window.MovieListView extends Backbone.View
     '<div>
     <h2>Mosaic Films</h2>
     <tbody>
-      <table class="table table-hover">
+      <table class="table">
       </table>
     </tbody></div>'
 
@@ -13,7 +13,8 @@ class window.MovieListView extends Backbone.View
 
   events:
     "click .btn": (e) ->
-      @newRating(e.currentTarget.id, e.currentTarget.classList[0])
+      if e.currentTarget.classList[0] isnt 'notseen'
+        @newRating(e.currentTarget.id, e.currentTarget.classList[0])
       @$('#'+e.currentTarget.id).hide('slow')
 
   newRating: (id, like) ->
@@ -25,7 +26,8 @@ class window.MovieListView extends Backbone.View
       @$('.table').append '<tr id="'+movie._id+'"><td>
         '+movie.name+'</td>
         <td>
-        <button type="button" class="liked btn btn-success btn-mini" id="'+movie._id+'">Like</button>
-        <button type="button" class="disliked btn btn-danger btn-mini" id="'+movie._id+'">Dislike</button>
+        <button type="button" class="liked btn btn-success btn-xs" id="'+movie._id+'"><i class="icon-thumbs-up"></i></button>
+        <button type="button" class="disliked btn btn-danger btn-xs" id="'+movie._id+'"><i class="icon-thumbs-down"></i></button>
+        <button type="button" class="notseen btn btn-warning btn-xs" id="'+movie._id+'"><i class="icon-chevron-right"></i></button>
         </td>
         </tr>'
