@@ -2,7 +2,7 @@ class window.TopRatedView extends Backbone.View
 
   template: '
       <div>
-      <h2>Most Similar to / Least Similar to</h2>
+      <h2>Top Rated</h2>
       <div id="toprated">
       </div>
       </div>
@@ -20,24 +20,29 @@ class window.TopRatedView extends Backbone.View
     , 100 )
 
   translateRes: (res) ->
-    res.bestScores # array of id's and ratings
+    @scoreImport = res.bestScores
+    @movieArray = []
+    @scoreArray = []
+    @scoreLength = @scoreImport.length
+    for index, value of @scoreImport
+      if index%2 is 0
+        @movieArray.push(value)
+      else
+        @scoreArray.push(value)
+    @reRender()
 
-  reRender: (res) ->
-    console.log(res)
-    @$('#toprated').isotope( 'shuffle')
-    topRatedToAdd = _.difference(res.bestRated, @oldRated)
-    topRatedToRemove = _.difference(@oldRated, res.bestRated)
-    @oldRated = res.bestRated
-    for index, userid of topRatedToAdd
-      @name = @model.userObj.userLookup[userid] || 'newUser'
-      newUser = $('<div class="element metalloid '+@name.replace(/\s+/g, '').toLowerCase()+'">'+@name+'</div>')
-      @$('#toprated').isotope('insert', newUser)
-    for index, userid of topRatedToRemove
-      @nameRemove = @model.userObj.userLookup[userid] || 'newUser'
-      removeUser = @$('.'+@nameRemove.replace(/\s+/g, '').toLowerCase())
-      @$('#toprated').isotope('remove', removeUser)
-    # topMoviesToAdd = _.difference(res.recommendations, @oldTopMovies)
-    # topMoviesToRemove = _.difference(@oldTopMovies, res.recommendations)
-    # @oldTopMovies = res.recommendations
-    @$('#toprated').isotope( 'shuffle')
+
+  reRender: ->
+    topRatedToAdd = _.difference(@movieArray, @oldRated)
+    topRatedToRemove = _.difference(@oldRated, @movieArray)
+    @oldRated = @movieArray
+    for index, movieid of topRatedToAdd
+      @movie = @model.userObj.movieLookup[movieid] || 'newMovie'
+      newMovie = $('<div class="element sprites '+@movie.replace(/\s+/g, '').toLowerCase()+'">'+@movie+'</br><div class="rating">'+@scoreArray[index].substring(0,4)+'</div></div>')
+      @$('#toprated').isotope('insert', newMovie)
+    for index, movieid of topRatedToRemove
+      @movieRemove = @model.userObj.movieLookup[movieid] || 'newMovie'
+      removeMovie = @$('.'+@movieRemove.replace(/\s+/g, '').toLowerCase())
+      @$('#toprated').isotope('remove', removeMovie)
+    @$('#toprated').isotope({ sortBy : 'rating' });
 
