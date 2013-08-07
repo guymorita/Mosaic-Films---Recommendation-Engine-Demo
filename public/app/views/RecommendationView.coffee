@@ -33,7 +33,6 @@ class window.RecommendationView extends Backbone.View
       error: (model, response) =>
         console.log('error model', model)
       success: (model, response) =>
-        console.log('success model', model)
         console.log('success res', response)
         @render(response)
     )
@@ -46,7 +45,6 @@ class window.RecommendationView extends Backbone.View
     @$('.topRated').html @topRatedView.el
 
   render: (res) ->
-    console.log(res)
     @topUsersView.reRender(res)
     @topRatedView.translateRes(res)
     moviesToAdd = _.difference(res.recommendations, @oldMovies)
@@ -59,7 +57,4 @@ class window.RecommendationView extends Backbone.View
     for index, movieid of moviesToRemove
       removeMovie = @$('.'+(@model.userObj.movieLookup[movieid]).replace(/\s+/g, '').toLowerCase())
       @$('#container').isotope('remove', removeMovie)
-    # topMoviesToAdd = _.difference(res.recommendations, @oldTopMovies)
-    # topMoviesToRemove = _.difference(@oldTopMovies, res.recommendations)
-    # @oldTopMovies = res.recommendations
     @$('#container').isotope( 'shuffle')
