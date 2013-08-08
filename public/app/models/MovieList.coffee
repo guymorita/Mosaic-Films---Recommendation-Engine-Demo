@@ -1,4 +1,4 @@
-class window.MovieList extends Backbone.Model
+ class window.MovieList extends Backbone.Model
 
   urlRoot : '/getMovieList'
 
