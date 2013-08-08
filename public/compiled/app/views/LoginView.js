@@ -12,36 +12,56 @@
       return _ref;
     }
 
-    LoginView.prototype.template = '<div class="row">\
+    LoginView.prototype.template = '<div class="row" style="margin-top:100px;">\
       <div class="col-lg-4"></div>\
       <div class="col-lg-4">\
         <h1>Mosaic Films</h1>\
+        <blockquote>instant movie recommendations from people like you!</blockquote>\
+        <h1></h1>\
         <div class="well">\
           <div class="input-group">\
             <input type="text" class="form-control" placeholder="enter a new or existing username">\
             <span class="input-group-btn">\
               <button id="submitButton" class="btn btn-default" type="button">Go</button>\
+              </a>\
             </span>\
           </div>\
         </div>\
         <div class="col-lg-4"></div>\
       </div>\
     </div>\
-    <div class="row">\
+    <div class="row" style="margin-top:50px;">\
       <div class="col-lg-2"></div>\
       <div class="col-lg-8">\
-        <div class="fimagecontainer">\
-          <div class="coversprites fimage oldboyy"></div>\
-          <div class="coversprites fimage timessquare"></div>\
-          <div class="coversprites fimage dogs"></div>\
-          <div class="coversprites fimage space"></div>\
+        <div class="row">\
+          <div class="col-lg-3">\
+            <div class="coversprites fimage oldboyy"></div>\
+          </div>\
+          <div class="col-lg-3">\
+            <div class="coversprites fimage timessquare"></div>\
+          </div>\
+          <div class="col-lg-3">\
+            <div class="coversprites fimage dogs"></div>\
+          </div>\
+          <div class="col-lg-3">\
+            <div class="coversprites fimage space"></div>\
+          </div>\
         </div>\
       </div>\
       <div class="col-lg-2"></div>\
     </div>';
 
     LoginView.prototype.initialize = function() {
-      return this.render();
+      this.render();
+      setTimeout(function() {
+        return this.$('.tip').tooltip({
+          placement: 'right',
+          html: true
+        }).tooltip('show');
+      }, 1000);
+      return this.$('.tip').on('click', function() {
+        return this.$('.tip').tooltip('destroy');
+      });
     };
 
     LoginView.prototype.events = {

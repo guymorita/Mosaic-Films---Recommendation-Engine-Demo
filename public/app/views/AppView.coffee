@@ -16,7 +16,7 @@ class window.AppView extends Backbone.View
         testing
         </div>
       </div>
-      <div id="powered"><a href="https://github.com/guymorita/recommendationRaccoon" target="_blank">Powered by recommendationRaccoon (Node.js Module)</a></div>
+      <div class="rlink" id="powered"><a href="https://github.com/guymorita/recommendationRaccoon" target="_blank">Powered by recommendationRaccoon (Node.js Module)</a></div>
     </div>'
 
   initialize: ->

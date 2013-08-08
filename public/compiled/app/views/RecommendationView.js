@@ -14,7 +14,9 @@
 
     RecommendationView.prototype.template = '\
       <div>\
+      <a class="tip" data-toggle="tooltip" data-placement="right" title="Rate some movies and we&#39;ll provide you with recommendations from similar users!">\
       <h2>Your Recommendations</h2>\
+      </a>\
       <div id="container">\
       </div>\
       </div>\
@@ -31,8 +33,13 @@
     </div>';
 
     RecommendationView.prototype.initialize = function() {
+      setTimeout(function() {
+        return this.$('.tip').tooltip({
+          placement: 'left'
+        }).tooltip('show');
+      }, 1000);
       this.oldMovies;
-      this.initial = 0;
+      this.initial = false;
       this.$el.append(this.template);
       this.$el.append(this.loadingTemplate);
       this.$('#container').isotope({
@@ -59,15 +66,22 @@
           return console.log('error model', model);
         },
         success: function(model, response) {
-          if (_this.initial === 0) {
-            _this.initialRender();
-            _this.$('.loading').hide('slow');
-            _this.initial = 1;
+          if (_this.initial === false) {
+            _this.handleFirstRating();
+            _this.initial = true;
           }
           console.log('success res', response);
           return _this.render(response);
         }
       });
+    };
+
+    RecommendationView.prototype.handleFirstRating = function() {
+      this.initialRender();
+      this.$('.loading').hide('slow');
+      return setTimeout(function() {
+        return this.$('.tip').tooltip('hide');
+      }, 1000);
     };
 
     RecommendationView.prototype.initialRender = function() {
