@@ -205,7 +205,14 @@ body {
           border-top-right-radius: 1.2em;
 }
 
+.fimage {
+  float:left;
+  margin: 0 15px 0 0;
+}
 
+.fimagecontainer{
+  padding: 0 0 0 200px;
+}
 
 .element.alkali          { background: #F00; background: hsl(   0, 100%, 50%); }
 .element.alkaline-earth  { background: #F80; background: hsl(  36, 100%, 50%); }
@@ -259,8 +266,8 @@ body {
   top: 0.5em;
 }
 
-.element .user {
-  font-size: 2em;
+.element.user {
+  font-size: 1.5em;
   font-weight: bold;
 }
 
