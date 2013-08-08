@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "MovieModal.js",
+  "sourceRoot": "../../..",
+  "sources": [
+    "app/models/MovieModal.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,GAAA,EAAA;KAAA;oSAAA;;CAAA,CAAM,IAAM;CAEV;;;;;CAAA;;CAAA,EAAA,MAAK;CACyB,EAAD,CAAC,SAA5B,WAAA;CADF,IAAK;;CAAL,EAGY,MAAA,CAAZ;;CAHA,EAKQ,GAAR,GAAQ;;CALR;;CAF8B,OAAQ;CAAxC"
+}

@@ -16,7 +16,10 @@
       return "/newRating/?:userId=" + this.userObj.userId + "&movie[id]=" + this.idFetch + "&movie[like]=" + this.likeFetch;
     };
 
-    RecommendationList.prototype.initialize = function() {};
+    RecommendationList.prototype.initialize = function() {
+      var movieModal;
+      return this.set('movieModal', movieModal = new MovieModal());
+    };
 
     RecommendationList.prototype.render = function() {};
 

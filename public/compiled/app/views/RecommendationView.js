@@ -26,10 +26,15 @@
     RecommendationView.prototype.topRatedTemplate = '<div class="topRated">\
     </div>';
 
+    RecommendationView.prototype.loadingTemplate = '<div class="loading">\
+      <i class="icon-spinner icon-spin icon-large"></i> please enter more ratings...\
+    </div>';
+
     RecommendationView.prototype.initialize = function() {
       this.oldMovies;
+      this.initial = 0;
       this.$el.append(this.template);
-      this.initialRender();
+      this.$el.append(this.loadingTemplate);
       this.$('#container').isotope({
         itemSelector: '.element',
         animationEngine: 'jquery'
@@ -37,6 +42,10 @@
       return setTimeout(function() {
         return this.$('#container').isotope('reLayout');
       }, 100);
+    };
+
+    RecommendationView.prototype.events = {
+      "click .element": function(e) {}
     };
 
     RecommendationView.prototype.handleRating = function(ratingObject) {
@@ -50,6 +59,11 @@
           return console.log('error model', model);
         },
         success: function(model, response) {
+          if (_this.initial === 0) {
+            _this.initialRender();
+            _this.$('.loading').hide('slow');
+            _this.initial = 1;
+          }
           console.log('success res', response);
           return _this.render(response);
         }
@@ -79,7 +93,7 @@
       this.$('#container').isotope('shuffle');
       for (index in moviesToAdd) {
         movieid = moviesToAdd[index];
-        newMovie = $('<div class="element sprites ' + this.model.userObj.movieLookup[movieid].replace(/\s+/g, '').toLowerCase() + '">' + this.model.userObj.movieLookup[movieid] + '</div>');
+        newMovie = $('<div id="' + movieid + '" class="element sprites ' + this.model.userObj.movieLookup[movieid].replace(/\s+/g, '').toLowerCase() + '">' + this.model.userObj.movieLookup[movieid] + '</div>');
         this.$('#container').isotope('insert', newMovie);
       }
       for (index in moviesToRemove) {

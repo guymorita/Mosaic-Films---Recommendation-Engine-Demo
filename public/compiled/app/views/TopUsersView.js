@@ -42,7 +42,7 @@
       for (index in usersToAdd) {
         userid = usersToAdd[index];
         this.name = this.model.userObj.userLookup[userid] || 'newUser';
-        newUser = $('<div class="element user metalloid ' + this.name.replace(/\s+/g, '').toLowerCase() + '">' + this.name + '</div>');
+        newUser = $('<div id="' + userid + '" class="element user metalloid ' + this.name.replace(/\s+/g, '').toLowerCase() + '">' + this.name + '</div>');
         this.$('#similarity').isotope('insert', newUser);
       }
       for (index in usersToRemove) {
@@ -57,7 +57,7 @@
       for (index in disUsersToAdd) {
         userid = disUsersToAdd[index];
         this.disName = this.model.userObj.userLookup[userid] || 'newUser';
-        disNewUser = $('<div class="element user noble-gas nonmetal ' + this.disName.replace(/\s+/g, '').toLowerCase() + '">' + this.disName + '</div>');
+        disNewUser = $('<div id="' + userid + '" class="element user noble-gas nonmetal ' + this.disName.replace(/\s+/g, '').toLowerCase() + '">' + this.disName + '</div>');
         this.$('#similarity').isotope('insert', disNewUser);
       }
       for (index in disUsersToRemove) {

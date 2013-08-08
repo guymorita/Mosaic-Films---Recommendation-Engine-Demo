@@ -6,7 +6,8 @@ class window.MovieListView extends Backbone.View
     <tbody>
       <table class="table">
       </table>
-    </tbody></div>'
+    </tbody>
+    </div>'
 
   initialize: ->
     @render()

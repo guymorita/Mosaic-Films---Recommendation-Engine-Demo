@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "MovieModalView.js",
+  "sourceRoot": "../../..",
+  "sources": [
+    "app/views/MovieModalView.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,GAAA,EAAA;KAAA;oSAAA;;CAAA,CAAM,IAAM;CAEV;;;;;CAAA;;CAAA,EACE,KADF;;CAAA,WAAA;;CAAA,EAKY,MAAA,CAAZ;CACG,EAAG,CAAH,EAAD,EAAA,KAAA;CANF,IAKY;;CALZ,EAeQ,GAAR,GAAS;;CAfT;;CAFkC,OAAQ;CAA5C"
+}

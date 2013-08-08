@@ -27,7 +27,7 @@ class window.TopUsersView extends Backbone.View
     @oldUsers = res.similarUsers.slice(0,3)
     for index, userid of usersToAdd
       @name = @model.userObj.userLookup[userid] || 'newUser'
-      newUser = $('<div class="element user metalloid '+@name.replace(/\s+/g, '').toLowerCase()+'">'+@name+'</div>')
+      newUser = $('<div id="'+userid+'" class="element user metalloid '+@name.replace(/\s+/g, '').toLowerCase()+'">'+@name+'</div>')
       @$('#similarity').isotope('insert', newUser)
     for index, userid of usersToRemove
       @nameRemove = @model.userObj.userLookup[userid] || 'newUser'
@@ -38,7 +38,7 @@ class window.TopUsersView extends Backbone.View
     @oldDisUsers = res.similarUsers.slice(-3)
     for index, userid of disUsersToAdd
       @disName = @model.userObj.userLookup[userid] || 'newUser'
-      disNewUser = $('<div class="element user noble-gas nonmetal '+@disName.replace(/\s+/g, '').toLowerCase()+'">'+@disName+'</div>')
+      disNewUser = $('<div id="'+userid+'" class="element user noble-gas nonmetal '+@disName.replace(/\s+/g, '').toLowerCase()+'">'+@disName+'</div>')
       @$('#similarity').isotope('insert', disNewUser)
     for index, userid of disUsersToRemove
       @disNameRemove = @model.userObj.userLookup[userid] || 'newUser'

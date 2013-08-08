@@ -17,7 +17,8 @@
     <tbody>\
       <table class="table">\
       </table>\
-    </tbody></div>';
+    </tbody>\
+    </div>';
 
     MovieListView.prototype.initialize = function() {
       return this.render();
