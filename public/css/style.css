@@ -102,6 +102,7 @@ body {
   line-height: 1.7em;
   background: #2E2E2E;
   color: #FFF;
+  background: url('/img/bokeh.jpg');
 }
 
 h1, h2, h3, p, ul, ol, pre, dl {
@@ -130,18 +131,18 @@ ul, ol {
   margin-left: 1.5em;
 }
 
-a,
+.rlink a,
 a code {
   color: #FB4;
   text-decoration: none;
 }
 
-a:hover,
+.rlink a:hover,
 a:hover code {
   color: #4BF;
 }
 
-a:active,
+.rlink a:active,
 a:active code {
   color: #1FB;
   background: black;
@@ -203,15 +204,6 @@ body {
   -webkit-border-top-right-radius: 1.2em;
       -moz-border-radius-topright: 1.2em;
           border-top-right-radius: 1.2em;
-}
-
-.fimage {
-  float:left;
-  margin: 0 15px 0 0;
-}
-
-.fimagecontainer{
-  padding: 0 0 0 200px;
 }
 
 .element.alkali          { background: #F00; background: hsl(   0, 100%, 50%); }

@@ -314,7 +314,7 @@ textarea {
   line-height: inherit;
 }
 
-a {
+/*a {
   color: #428bca;
   text-decoration: none;
 }
@@ -323,7 +323,7 @@ a:hover,
 a:focus {
   color: #2a6496;
   text-decoration: underline;
-}
+}*/
 
 a:focus {
   outline: thin dotted #333;
@@ -3518,10 +3518,11 @@ button.close {
 .tooltip-inner {
   max-width: 200px;
   padding: 3px 8px;
-  color: #ffffff;
+/*  color: #ffffff;*/
+  color: #7D3DDF;
   text-align: center;
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(248, 248, 248, 0.9);
   border-radius: 4px;
 }
 
