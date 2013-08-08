@@ -13,7 +13,20 @@ class window.LoginView extends Backbone.View
             </span>
           </div>
         </div>
-      <div class="col-lg-4"></div>
+        <div class="col-lg-4"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <div class="fimagecontainer">
+          <div class="coversprites fimage oldboyy"></div>
+          <div class="coversprites fimage timessquare"></div>
+          <div class="coversprites fimage dogs"></div>
+          <div class="coversprites fimage space"></div>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
     </div>'
 
   initialize: ->
