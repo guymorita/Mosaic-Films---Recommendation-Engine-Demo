@@ -2,12 +2,13 @@
 var express = require('express'),
     raccoon = require('raccoon').raccoon(),
     path = require('path'),
+    starter = require('./sampleContent/starter.js').starter(),
     app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login', function(req, res){
-  raccoon.models.buildLoginObject(req.query[':username'], function(object){
+  starter.buildLoginObject(req.query[':username'], function(object){
     res.send(object);
   });
 });
@@ -65,9 +66,10 @@ app.get('/movieLikes', function(req, res){
 });
 
 app.get('/importMovies', function(req, res){
-  raccoon.models.importCSV(raccoon.models.importLib);
+  starter.importCSV(starter.importLib);
   res.send('SUCCESS: Movies Imported');
 });
+// models = config.sampleContent ? require('./sampleContent/starter.js').starter() : undefined,
 
 
 app.listen(3000);
