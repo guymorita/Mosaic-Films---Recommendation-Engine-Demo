@@ -2,7 +2,9 @@ class window.RecommendationView extends Backbone.View
 
   template: '
       <div>
+      <a class="tip" data-toggle="tooltip" data-placement="right" title="Rate some movies and we&#39;ll provide you with recommendations from similar users!">
       <h2>Your Recommendations</h2>
+      </a>
       <div id="container">
       </div>
       </div>
@@ -21,8 +23,11 @@ class window.RecommendationView extends Backbone.View
     </div>'
 
   initialize: ->
+    setTimeout ->
+      @$('.tip').tooltip({placement: 'left'}).tooltip('show')
+    , 1000
     @oldMovies
-    @initial = 0
+    @initial = false
     @$el.append @template
     @$el.append @loadingTemplate
     @$('#container').isotope({
@@ -51,13 +56,19 @@ class window.RecommendationView extends Backbone.View
       error: (model, response) =>
         console.log('error model', model)
       success: (model, response) =>
-        if @initial is 0
-          @initialRender()
-          @$('.loading').hide('slow')
-          @initial = 1
+        if @initial is false
+          @handleFirstRating()
+          @initial = true
         console.log('success res', response)
         @render(response)
     )
+
+  handleFirstRating: ->
+    @initialRender()
+    @$('.loading').hide('slow')
+    setTimeout( ->
+      @$('.tip').tooltip('hide')
+    , 1000)
 
   initialRender: ->
     @$el.append @topUsersTemplate

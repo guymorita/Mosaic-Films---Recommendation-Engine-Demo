@@ -11,6 +11,16 @@ class window.MovieListView extends Backbone.View
 
   initialize: ->
     @render()
+    # @$('.tip').tooltip()
+    # setTimeout ->
+    #   @$('.tip').tooltip({placement: 'right'}).tooltip('show')
+    # , 1000
+    # @$('.tip').on('click', ->
+    #   @$('.tip').tooltip('destroy')
+    # )
+    # setTimeout( ->
+    #   @$('.tip').tooltip('hide')
+    # , 20000)
 
   events:
     "click .btn": (e) ->
