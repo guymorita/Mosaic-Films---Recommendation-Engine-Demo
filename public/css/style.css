@@ -191,11 +191,16 @@ body {
   overflow: auto;
 }
 
-#powered{
+#powered {
     position: fixed;
     right: 0;
     bottom: 0;
 }
+
+.smallicon {
+  font-size: 0.6em;
+}
+
 .element {
   width: 110px;
   height: 110px;
