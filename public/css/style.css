@@ -174,7 +174,7 @@ body {
   margin-bottom: 20px;
 }
 
-#similarity {
+#similarity, #disSimilarity {
   border: 1px solid #666;
   padding: 5px;
   margin-bottom: 20px;
