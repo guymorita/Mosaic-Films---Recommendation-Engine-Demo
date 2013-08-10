@@ -4,8 +4,8 @@ class window.LoginView extends Backbone.View
     '<div class="row" style="margin-top:100px;">
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
-        <h1>Mosaic Films</h1>
-        <blockquote><em>instant</em> movie recommendations from people like you!</blockquote>
+        <h1 class="coverheader">Mosaic Films</h1>
+        <blockquote style="font-size: 1.5em;"><em>instant</em> movie recommendations from people like you!</blockquote>
         <h1></h1>
         <div class="well">
           <div class="input-group">
@@ -24,16 +24,40 @@ class window.LoginView extends Backbone.View
       <div class="col-lg-8">
         <div class="row">
           <div class="col-lg-3">
-            <div class="coversprites fimage oldboyy"></div>
+            <div class="coversprites fimage cover1">
+              <div class="coverlayer">
+              <p class="covertext ct1">
+                <i class="icon-edit"></i> Enter a Username
+                </p>
+                </div>
+              </div>
           </div>
           <div class="col-lg-3">
-            <div class="coversprites fimage timessquare"></div>
+            <div class="coversprites fimage cover2">
+              <div class="coverlayer">
+              <p class="covertext ct2">
+                <i class="icon-check-sign"></i> Rate some movies!
+              </p>
+              </div>
+            </div>
           </div>
           <div class="col-lg-3">
-            <div class="coversprites fimage dogs"></div>
+            <div class="coversprites fimage cover4">
+              <div class="coverlayer">
+              <p class="covertext ct3">
+              <i class="icon-group"></i> See similar users
+              </p>
+              </div>
+              </div>
           </div>
           <div class="col-lg-3">
-            <div class="coversprites fimage space"></div>
+            <div class="coversprites fimage cover3">
+              <div class="coverlayer">
+              <p class="covertext ct4">
+                <i class="icon-film"></i> Get movie recommendations from similar users
+              </p>
+              </div>
+              </div>
           </div>
         </div>
       </div>
