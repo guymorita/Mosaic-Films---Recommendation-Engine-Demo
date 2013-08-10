@@ -201,6 +201,44 @@ body {
   font-size: 0.6em;
 }
 
+.covertext {
+  font-size:1.5em;
+  padding: 10px;
+
+}
+
+.ct1 {
+  text-shadow: 1px 1px 5px rgba(65,170,65,0.5), -1px -1px 5px rgba(65,170,65,0.5);
+
+}
+.ct2 {
+  text-shadow: 1px 1px 5px rgba(212,139,82,0.5), -1px -1px 5px rgba(212,139,82,0.5);
+
+}
+.ct3 {
+  text-shadow: 1px 1px 5px rgba(50,131,125,0.5), -1px -1px 5px rgba(50,131,125,0.5);
+
+}
+.ct4 {
+  text-shadow: 1px 1px 5px rgba(212,82,82,0.5), -1px -1px 5px rgba(212,82,82,0.5);
+
+}
+.coverlayer {
+  width: 100%;
+  height: 100%;
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.76)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.76) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(0,0,0,0.76) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(0,0,0,0.76) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.76) 0%,rgba(0,0,0,0) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+
+h1.coverheader {
+  font-size: 56px;
+}
+
 .element {
   width: 110px;
   height: 110px;
