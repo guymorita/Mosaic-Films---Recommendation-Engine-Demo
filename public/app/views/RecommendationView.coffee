@@ -2,17 +2,21 @@ class window.RecommendationView extends Backbone.View
 
   template: '
       <div>
-      <a class="tip" data-toggle="tooltip" data-placement="right" title="Rate some movies and we&#39;ll provide you with recommendations from similar users!">
+      <a class="tip" data-toggle="tooltip" data-placement="left" title="Rate some movies and we&#39;ll provide you with recommendations from similar users!">
+        </a>
       <div class="row">
         <div class="col-lg-6">
-          <h2>Your Recommendations</h2>
+          <h2>Your Recommendations
+          <a class="tip2" data-toggle="tooltip" data-placement="left" title="Here are your recommendations! They change after every new rating based on what similar users like and dislike.">
+            <i class="icon-info-sign smallicon"></i>
+          </a>
+          </h2>
         </div>
-        <div id="userBox" class="col-lg-5">
-        </div>
+          <div id="userBox" class="col-lg-5">
+          </div>
         <div class="col-lg-1">
         </div>
         </div>
-      </a>
       <div id="container">
       </div>
       </div>
@@ -32,11 +36,12 @@ class window.RecommendationView extends Backbone.View
 
   initialize: ->
     setTimeout ->
-      @$('.tip').tooltip({placement: 'left'}).tooltip('show')
+      @$('.tip').tooltip({placement: 'auto'}).tooltip('show')
     , 1000
     @oldMovies
     @initial = false
     @$el.append @template
+    # @$('.tip2').tooltip('hide')
     @$('#userBox').html '<div class="pull-right">'+@model.userObj.username+' <i class="icon-caret-down"></i></div>'
     @$el.append @loadingTemplate
     @$('#container').isotope({
@@ -77,7 +82,11 @@ class window.RecommendationView extends Backbone.View
     @$('.loading').hide('slow')
     setTimeout( ->
       @$('.tip').tooltip('hide')
+      @$('.tip2').tooltip({placement: 'bottom'}).tooltip('show')
     , 1000)
+    setTimeout( ->
+      @$('.tip2').tooltip('hide')
+    , 10000)
 
   initialRender: ->
     @$el.append @topUsersTemplate
