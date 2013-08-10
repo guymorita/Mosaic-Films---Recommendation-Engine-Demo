@@ -15,7 +15,15 @@
     RecommendationView.prototype.template = '\
       <div>\
       <a class="tip" data-toggle="tooltip" data-placement="right" title="Rate some movies and we&#39;ll provide you with recommendations from similar users!">\
-      <h2>Your Recommendations</h2>\
+      <div class="row">\
+        <div class="col-lg-6">\
+          <h2>Your Recommendations</h2>\
+        </div>\
+        <div id="userBox" class="col-lg-5">\
+        </div>\
+        <div class="col-lg-1">\
+        </div>\
+        </div>\
       </a>\
       <div id="container">\
       </div>\
@@ -41,6 +49,7 @@
       this.oldMovies;
       this.initial = false;
       this.$el.append(this.template);
+      this.$('#userBox').html('<div class="pull-right">' + this.model.userObj.username + ' <i class="icon-caret-down"></i></div>');
       this.$el.append(this.loadingTemplate);
       this.$('#container').isotope({
         itemSelector: '.element',

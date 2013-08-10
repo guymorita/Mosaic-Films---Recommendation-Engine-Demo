@@ -14,10 +14,12 @@
 
     MovieListView.prototype.template = '<div>\
     <h2>Mosaic Films</h2>\
+    <div class="scrollBox">\
     <tbody>\
       <table class="table">\
       </table>\
     </tbody>\
+    </div>\
     </div>';
 
     MovieListView.prototype.initialize = function() {

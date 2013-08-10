@@ -129,7 +129,7 @@ exports.starter = function(urlOfDB){
             headers = row;
           }
         } else {
-          insertRow(row, headers);
+          // insertRow(row, headers);
         }
       })
       .on('end', function(){
