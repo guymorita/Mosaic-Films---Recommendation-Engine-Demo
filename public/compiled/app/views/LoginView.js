@@ -16,7 +16,7 @@
       <div class="col-lg-4"></div>\
       <div class="col-lg-4">\
         <h1>Mosaic Films</h1>\
-        <blockquote>instant movie recommendations from people like you!</blockquote>\
+        <blockquote><em>instant</em> movie recommendations from people like you!</blockquote>\
         <h1></h1>\
         <div class="well">\
           <div class="input-group">\
@@ -53,14 +53,10 @@
 
     LoginView.prototype.initialize = function() {
       this.render();
-      setTimeout(function() {
-        return this.$('.tip').tooltip({
-          placement: 'right',
-          html: true
-        }).tooltip('show');
-      }, 1000);
-      return this.$('.tip').on('click', function() {
-        return this.$('.tip').tooltip('destroy');
+      return $(document).ready(function() {
+        var mosimg;
+        mosimg = new Image();
+        return mosimg.src = "/img/moviecollage2.png";
       });
     };
 

@@ -13,10 +13,17 @@
     }
 
     TopUsersView.prototype.template = '\
-      <div>\
-      <h2>Most Similar to / Least Similar to</h2>\
-      <div id="similarity">\
-      </div>\
+      <div class="row">\
+        <div class="col-lg-6">\
+          <h2>Most Similar to</h2>\
+          <div id="similarity">\
+          </div>\
+        </div>\
+        <div class="col-lg-6">\
+          <h2>Least Similar to</h2>\
+          <div id="disSimilarity">\
+          </div>\
+        </div>\
       </div>\
       ';
 
@@ -27,8 +34,13 @@
         itemSelector: '.element',
         animationEngine: 'jquery'
       });
+      this.$('#disSimilarity').isotope({
+        itemSelector: '.element',
+        animationEngine: 'jquery'
+      });
       return setTimeout(function() {
-        return this.$('#similarity').isotope('reLayout');
+        this.$('#similarity').isotope('reLayout');
+        return this.$('#disSimilarity').isotope('reLayout');
       }, 100);
     };
 
@@ -36,9 +48,10 @@
       var disNewUser, disRemoveUser, disUsersToAdd, disUsersToRemove, index, newUser, removeUser, userid, usersToAdd, usersToRemove;
       console.log(res);
       this.$('#similarity').isotope('shuffle');
-      usersToAdd = _.difference(res.similarUsers.slice(0, 3), this.oldUsers);
-      usersToRemove = _.difference(this.oldUsers, res.similarUsers.slice(0, 3));
-      this.oldUsers = res.similarUsers.slice(0, 3);
+      this.$('#disSimilarity').isotope('shuffle');
+      usersToAdd = _.difference(res.similarUsers.slice(0, 5), this.oldUsers);
+      usersToRemove = _.difference(this.oldUsers, res.similarUsers.slice(0, 5));
+      this.oldUsers = res.similarUsers.slice(0, 5);
       for (index in usersToAdd) {
         userid = usersToAdd[index];
         this.name = this.model.userObj.userLookup[userid] || 'newUser';
@@ -51,22 +64,25 @@
         removeUser = this.$('.' + this.nameRemove.replace(/\s+/g, '').toLowerCase());
         this.$('#similarity').isotope('remove', removeUser);
       }
-      disUsersToAdd = _.difference(res.similarUsers.slice(-3), this.oldDisUsers);
-      disUsersToRemove = _.difference(this.oldDisUsers, res.similarUsers.slice(-3));
-      this.oldDisUsers = res.similarUsers.slice(-3);
-      for (index in disUsersToAdd) {
-        userid = disUsersToAdd[index];
-        this.disName = this.model.userObj.userLookup[userid] || 'newUser';
-        disNewUser = $('<div id="' + userid + '" class="element user noble-gas nonmetal ' + this.disName.replace(/\s+/g, '').toLowerCase() + '">' + this.disName + '</div>');
-        this.$('#similarity').isotope('insert', disNewUser);
+      this.$('#similarity').isotope('shuffle');
+      if (res.similarUsers.length > 5) {
+        disUsersToAdd = _.difference(res.similarUsers.slice(-5), this.oldDisUsers);
+        disUsersToRemove = _.difference(this.oldDisUsers, res.similarUsers.slice(-5));
+        this.oldDisUsers = res.similarUsers.slice(-5);
+        for (index in disUsersToAdd) {
+          userid = disUsersToAdd[index];
+          this.disName = this.model.userObj.userLookup[userid] || 'newUser';
+          disNewUser = $('<div id="' + userid + '" class="element user halogen ' + this.disName.replace(/\s+/g, '').toLowerCase() + '">' + this.disName + '</div>');
+          this.$('#disSimilarity').isotope('insert', disNewUser);
+        }
+        for (index in disUsersToRemove) {
+          userid = disUsersToRemove[index];
+          this.disNameRemove = this.model.userObj.userLookup[userid] || 'newUser';
+          disRemoveUser = this.$('.' + this.disNameRemove.replace(/\s+/g, '').toLowerCase());
+          this.$('#disSimilarity').isotope('remove', disRemoveUser);
+        }
+        return this.$('#disSimilarity').isotope('shuffle');
       }
-      for (index in disUsersToRemove) {
-        userid = disUsersToRemove[index];
-        this.disNameRemove = this.model.userObj.userLookup[userid] || 'newUser';
-        disRemoveUser = this.$('.' + this.disNameRemove.replace(/\s+/g, '').toLowerCase());
-        this.$('#similarity').isotope('remove', disRemoveUser);
-      }
-      return this.$('#similarity').isotope('shuffle');
     };
 
     return TopUsersView;
