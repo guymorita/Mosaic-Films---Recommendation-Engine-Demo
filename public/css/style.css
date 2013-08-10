@@ -186,6 +186,11 @@ body {
   margin-bottom: 20px;
 }
 
+.scrollBox {
+  height: 100%;
+  overflow: auto;
+}
+
 #powered{
     position: fixed;
     right: 0;
