@@ -2,7 +2,11 @@ class window.TopRatedView extends Backbone.View
 
   template: '
       <div>
-      <h2>Top Rated</h2>
+      <h2>Top Rated
+      <a class="tip5" data-toggle="tooltip" data-placement="right" title="These are the best rated movies overall with the exclusion of outliers.">
+        <i class="icon-info-sign smallicon"></i>
+      </a>
+      </h2>
       <div id="toprated">
       </div>
       </div>
@@ -11,6 +15,7 @@ class window.TopRatedView extends Backbone.View
   initialize: ->
     @oldRated
     @$el.append @template
+    @$('.tip5').tooltip('hide')
     @$('#toprated').isotope({
       itemSelector : '.element',
       animationEngine: 'jquery'
