@@ -212,12 +212,23 @@ body {
 .element.actinoid        { background: #0F0; background: hsl( 108, 100%, 50%); }
 .element.transition      { background: #0F8; background: hsl( 144, 100%, 50%); }
 .element.post-transition { background: #0FF; background: hsl( 180, 100%, 50%); }
-.element.metalloid       { background: #08F; background: hsl( 216, 100%, 50%); }
+.element.metalloid       { background: #08F; background: hsl( 176, 45%, 35%); }
 .element.other.nonmetal  { background: #00F; background: hsl( 252, 100%, 50%); }
-.element.halogen         { background: #F0F; background: hsl( 288, 100%, 50%); }
+.element.halogen         { background: #F0F; background: hsl( 0, 60%, 58%); }
 .element.noble-gas       { background: #F08; background: hsl( 324, 100%, 50%); }
 
+.element.user {
+  font-size: 1.0em;
+  font-weight: bold;
+  width: 80px;
+  height: 80px;
+  -webkit-border-top-right-radius: 0.8em;
+    -moz-border-radius-topright: 0.8em;
+        border-top-right-radius: 0.8em;
+}
 
+.element.user {
+}
 .element * {
   position: absolute;
   margin: 0;
@@ -258,10 +269,6 @@ body {
   top: 0.5em;
 }
 
-.element.user {
-  font-size: 1.5em;
-  font-weight: bold;
-}
 
 .variable-sizes .element.width2 { width: 230px; }
 
