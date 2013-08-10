@@ -31,6 +31,7 @@ class window.MovieListView extends Backbone.View
       @$('#'+e.currentTarget.id).hide('slow')
 
   newRating: (id, like) ->
+    console.log('id', id, like)
     @trigger 'newRating', {id: id, like:like}
 
   render: ->

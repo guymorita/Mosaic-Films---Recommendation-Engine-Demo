@@ -14,22 +14,32 @@
 
     TopUsersView.prototype.template = '\
       <div class="row">\
-        <div class="col-lg-6">\
-          <h2>Most Similar to</h2>\
-          <div id="similarity">\
-          </div>\
+      <div class="col-lg-6">\
+        <h2>Most Similar to\
+        <a class="tip3" data-toggle="tooltip" data-placement="right" title="These are the users you are most similar to. Many movies they&#39;ve seen and liked will be recommended to you.">\
+          <i class="icon-info-sign smallicon"></i>\
+        </a>\
+      </h2>\
+        <div id="similarity">\
         </div>\
-        <div class="col-lg-6">\
-          <h2>Least Similar to</h2>\
-          <div id="disSimilarity">\
-          </div>\
+      </div>\
+      <div class="col-lg-6">\
+        <h2>Least Similar to\
+        <a class="tip4" data-toggle="tooltip" data-placement="right" title="These are the users who have opposite preferences as you. Movies they don&#39;t like you often like.">\
+          <i class="icon-info-sign smallicon"></i>\
+        </a>\
+        </h2>\
+        <div id="disSimilarity">\
         </div>\
+      </div>\
       </div>\
       ';
 
     TopUsersView.prototype.initialize = function() {
       this.oldUsers;
       this.$el.append(this.template);
+      this.$('.tip3').tooltip('hide');
+      this.$('.tip4').tooltip('hide');
       this.$('#similarity').isotope({
         itemSelector: '.element',
         animationEngine: 'jquery'

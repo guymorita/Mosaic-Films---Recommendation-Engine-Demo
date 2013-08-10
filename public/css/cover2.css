@@ -1,0 +1,10 @@
+.coversprites {
+  background-image: url(/img/covermos1.png);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: 1px solid gray;
+}
+.cover1 { width: 212px; height: 310px; background-position: 0 0; }
+.cover2 { width: 212px; height: 310px; background-position: -213px 0; }
+.cover3 { width: 212px; height: 310px; background-position: -426px 0; }
+.cover4 { width: 212px; height: 310px; background-position: -639px 0; }

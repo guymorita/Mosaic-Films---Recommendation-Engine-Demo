@@ -14,17 +14,21 @@
 
     RecommendationView.prototype.template = '\
       <div>\
-      <a class="tip" data-toggle="tooltip" data-placement="right" title="Rate some movies and we&#39;ll provide you with recommendations from similar users!">\
+      <a class="tip" data-toggle="tooltip" data-placement="left" title="Rate some movies and we&#39;ll provide you with recommendations from similar users!">\
+        </a>\
       <div class="row">\
         <div class="col-lg-6">\
-          <h2>Your Recommendations</h2>\
+          <h2>Your Recommendations\
+          <a class="tip2" data-toggle="tooltip" data-placement="left" title="Here are your recommendations! They change after every new rating based on what similar users like and dislike.">\
+            <i class="icon-info-sign smallicon"></i>\
+          </a>\
+          </h2>\
         </div>\
-        <div id="userBox" class="col-lg-5">\
-        </div>\
+          <div id="userBox" class="col-lg-5">\
+          </div>\
         <div class="col-lg-1">\
         </div>\
         </div>\
-      </a>\
       <div id="container">\
       </div>\
       </div>\
@@ -43,7 +47,7 @@
     RecommendationView.prototype.initialize = function() {
       setTimeout(function() {
         return this.$('.tip').tooltip({
-          placement: 'left'
+          placement: 'auto'
         }).tooltip('show');
       }, 1000);
       this.oldMovies;
@@ -88,9 +92,15 @@
     RecommendationView.prototype.handleFirstRating = function() {
       this.initialRender();
       this.$('.loading').hide('slow');
-      return setTimeout(function() {
-        return this.$('.tip').tooltip('hide');
+      setTimeout(function() {
+        this.$('.tip').tooltip('hide');
+        return this.$('.tip2').tooltip({
+          placement: 'bottom'
+        }).tooltip('show');
       }, 1000);
+      return setTimeout(function() {
+        return this.$('.tip2').tooltip('hide');
+      }, 10000);
     };
 
     RecommendationView.prototype.initialRender = function() {

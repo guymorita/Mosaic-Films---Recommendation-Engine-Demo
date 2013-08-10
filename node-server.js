@@ -7,6 +7,10 @@ var express = require('express'),
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+starter.importCSV(starter.importLib);
+// app.get('/importMovies', function(req, res){
+//   res.send('SUCCESS: Movies Imported');
+// });
 app.get('/login', function(req, res){
   starter.buildLoginObject(req.query[':username'], function(object){
     res.send(object);
@@ -65,10 +69,6 @@ app.get('/movieLikes', function(req, res){
   });
 });
 
-app.get('/importMovies', function(req, res){
-  starter.importCSV(starter.importLib);
-  res.send('SUCCESS: Movies Imported');
-});
 // models = config.sampleContent ? require('./sampleContent/starter.js').starter() : undefined,
 
 

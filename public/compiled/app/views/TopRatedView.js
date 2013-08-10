@@ -14,7 +14,11 @@
 
     TopRatedView.prototype.template = '\
       <div>\
-      <h2>Top Rated</h2>\
+      <h2>Top Rated\
+      <a class="tip5" data-toggle="tooltip" data-placement="right" title="These are the best rated movies overall with the exclusion of outliers.">\
+        <i class="icon-info-sign smallicon"></i>\
+      </a>\
+      </h2>\
       <div id="toprated">\
       </div>\
       </div>\
@@ -23,6 +27,7 @@
     TopRatedView.prototype.initialize = function() {
       this.oldRated;
       this.$el.append(this.template);
+      this.$('.tip5').tooltip('hide');
       this.$('#toprated').isotope({
         itemSelector: '.element',
         animationEngine: 'jquery'

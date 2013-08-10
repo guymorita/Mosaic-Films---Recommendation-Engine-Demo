@@ -36,6 +36,7 @@
     };
 
     MovieListView.prototype.newRating = function(id, like) {
+      console.log('id', id, like);
       return this.trigger('newRating', {
         id: id,
         like: like
