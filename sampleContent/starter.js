@@ -4,13 +4,15 @@ exports.starter = function(urlOfDB){
   mongoose = require('mongoose'),
   _ = require('underscore'),
   csv = require('csv'),
-  raccoon = require('raccoon').raccoon();
+  raccoon = require('raccoon');
 
   var headers;
 
   if (raccoon.config.localSetup === true){
+    console.log('local mongo');
     mongoose.connect(raccoon.config.localMongoDbURL);
   } else {
+    console.log('remote mongo');
     mongoose.connect(raccoon.config.remoteMongoDbURL);
   }
 
@@ -25,6 +27,7 @@ exports.starter = function(urlOfDB){
   var Movie = mongoose.model('Movie', movieSchema);
 
   if (raccoon.config.flushDBsOnStart){
+    console.log('flushing');
     User.find().remove({});
     Movie.find().remove({});
   }
@@ -129,7 +132,7 @@ exports.starter = function(urlOfDB){
             headers = row;
           }
         } else {
-          // insertRow(row, headers);
+          insertRow(row, headers);
         }
       })
       .on('end', function(){
