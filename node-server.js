@@ -3,11 +3,9 @@ var express = require('express'),
     raccoon = require('raccoon'),
     path = require('path'),
     starter = require('./sampleContent/starter.js'),
-    redis = require('redis'),
     app = express();
 
-var client = redis.createClient();
-raccoon.setClient(client);
+raccoon.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
