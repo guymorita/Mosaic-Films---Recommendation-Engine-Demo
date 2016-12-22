@@ -10,8 +10,8 @@ Mosaic Films is a demo of the recommendationRaccoon engine built on top of Node.
 * MongoDB
 * Mongoose
 * Node
-* Raccoon - crucial
-* Redis - crucial
+* Raccoon
+* Redis
 * Underscore
 
 ## recommendationRaccoon Engine Repo
@@ -20,41 +20,56 @@ Mosaic Films is a demo of the recommendationRaccoon engine built on top of Node.
 
 ## How to install locally
 
-#### Clone the repo
+#### 1. Clone the repo
 ``` bash
 git clone https://github.com/guymorita/Mosaic-Films---Recommendation-Engine-Demo.git
 ```
 
-#### Navigate to the folder
+#### 2. Install dependencies
+Navigate to folder
 ``` bash
 cd Mosaic-Films---Recommendation-Engine-Demo
 ```
-
-#### Install ALL dependencies
 ``` bash
 npm install
 ```
 
-#### Make sure Raccoon's sampleContent is true
-```` js
-/node_modules/raccoon/config.js
-  // make sure - sampleContent: true
+#### 2a. Install a Redis (if you haven't already)
+``` bash
+brew install redis
 ```
 
-#### Boot up servers in separate terminal windows
+#### 2b. Install Mongo (if you haven't already)
+``` bash
+brew install mongod
+```
+Create the data directory
+``` bash
+sudo mkdir -p /data/db
+```
+Give yourself permissions for the /data/db folder
+``` bash
+whoami
+// your_username
+```
+``` bash
+sudo chown -R <your_username> 755 /data/db
+```
+
+#### 3. Boot up servers in separate terminal windows
 ``` bash
 redis-server
 ```
 ``` bash
-```mongod
+mongod
 ```
 ``` bash
 node node-server.js
 ```
 
-#### Import Movies
+#### 4. Import Movies
 * Go to http://localhost:3000/importMovies
-* If you're on a different local host, change it out
+* Only do this once. Otherwise you'll need to flush the mongo collection because you will have dupes.
 
-#### It's ready! Try the home page
+#### 5. It's ready! Try the home page
 * http://localhost:3000/
