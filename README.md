@@ -2,6 +2,11 @@
 
 Mosaic Films is a demo of the recommendationRaccoon engine built on top of Node.js. It is a full installation of the module that takes advantage of lightning fast recommendations powered by Redis and a simple user interface. It comes complete with sample content and tests.
 
+Get up and running in less than 5 minutes!
+
+Video Demo of Mosaic:
+![Video Walkthrough of Mosaic](mosaic.gif)
+
 ## Dependencies
 
 * Async
