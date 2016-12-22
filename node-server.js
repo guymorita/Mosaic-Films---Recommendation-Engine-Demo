@@ -2,8 +2,12 @@
 var express = require('express'),
     raccoon = require('raccoon'),
     path = require('path'),
-    starter = require('./sampleContent/starter.js').starter(),
+    starter = require('./sampleContent/starter.js'),
+    redis = require('redis'),
     app = express();
+
+var client = redis.createClient();
+raccoon.setClient(client);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -15,8 +19,9 @@ app.get('/login', function(req, res){
 
 app.get('/newRating', function(req, res){
   var replyObj = {};
+
   if (req.query.movie.like === 'liked'){
-    raccoon.input.liked(req.query[':userId'], req.query.movie.id, function(){
+    raccoon.liked(req.query[':userId'], req.query.movie.id, function(){
       raccoon.stat.recommendFor(req.query[':userId'], 15, function(recs){
         console.log('recs liked', recs);
         raccoon.stat.mostSimilarUsers(req.query[':userId'], function(simUsers){
@@ -33,7 +38,7 @@ app.get('/newRating', function(req, res){
       });
     });
   } else {
-    raccoon.input.disliked(req.query[':userId'], req.query.movie.id, function(){
+    raccoon.disliked(req.query[':userId'], req.query.movie.id, function(){
       raccoon.stat.recommendFor(req.query[':userId'], 15, function(recs){
         console.log('recs disliked', recs);
         raccoon.stat.mostSimilarUsers(req.query[':userId'], function(simUsers){
@@ -70,4 +75,6 @@ app.get('/importMovies', function(req, res){
   res.send('SUCCESS: Movies Imported');
 });
 
-app.listen(3000);
+app.listen(3000, function() {
+  console.log('--- Mosaic up and running! ---');
+});

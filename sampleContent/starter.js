@@ -1,4 +1,4 @@
-exports.starter = function(urlOfDB){
+module.exports = exports = (function(){  
 
   var async = require('async'),
   mongoose = require('mongoose'),
@@ -8,13 +8,7 @@ exports.starter = function(urlOfDB){
 
   var headers;
 
-  if (raccoon.config.localSetup === true){
-    console.log('local mongo');
-    mongoose.connect(raccoon.config.localMongoDbURL);
-  } else {
-    console.log('remote mongo');
-    mongoose.connect(raccoon.config.remoteMongoDbURL);
-  }
+  mongoose.connect(process.env.MOSAIC_MONGO_URL || 'mongodb://localhost/mosaic');
 
   var userSchema = mongoose.Schema({
     name: String
@@ -25,12 +19,6 @@ exports.starter = function(urlOfDB){
     name: String
   });
   var Movie = mongoose.model('Movie', movieSchema);
-
-  if (raccoon.config.flushDBsOnStart){
-    console.log('flushing');
-    User.find().remove({});
-    Movie.find().remove({});
-  }
 
   module.exports = {
     User: User,
@@ -63,14 +51,14 @@ exports.starter = function(urlOfDB){
     User.findOne({name:userName}, function(err, userData){
       Movie.findOne({name:movieName}, function(err, movieData){
         if (rating > 3){
-          raccoon.input.liked(userData._id, movieData._id, function(){});
+          raccoon.liked(userData._id, movieData._id, function(){});
         } else if (rating < 3) {
-          raccoon.input.disliked(userData._id, movieData._id, function(){});
+          raccoon.disliked(userData._id, movieData._id, function(){});
         } else {
           if (function(){return Math.floor(Math.random()*1.5)}===1){
-            raccoon.input.liked(userData._id, movieData._id, function(){});
+            raccoon.liked(userData._id, movieData._id, function(){});
           } else {
-            raccoon.input.disliked(userData._id, movieData._id, function(){});
+            raccoon.disliked(userData._id, movieData._id, function(){});
           }
         }
         // input.userList(userData._id);
@@ -142,4 +130,4 @@ exports.starter = function(urlOfDB){
       });
     }
   };
-};
+}).call(this);
