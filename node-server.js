@@ -5,8 +5,6 @@ var express = require('express'),
     starter = require('./sampleContent/starter.js'),
     app = express();
 
-raccoon.connect();
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login', function(req, res){
@@ -18,41 +16,24 @@ app.get('/login', function(req, res){
 app.get('/newRating', function(req, res){
   var replyObj = {};
 
-  if (req.query.movie.like === 'liked'){
-    raccoon.liked(req.query[':userId'], req.query.movie.id, function(){
-      raccoon.stat.recommendFor(req.query[':userId'], 15, function(recs){
-        console.log('recs liked', recs);
-        raccoon.stat.mostSimilarUsers(req.query[':userId'], function(simUsers){
-          raccoon.stat.bestRatedWithScores(9, function(bestRated){
-            replyObj = {
-              recommendations: recs,
-              similarUsers: simUsers,
-              bestScores: bestRated
-            };
-            console.log('replyObj', replyObj);
-            res.send(replyObj);
-          });
+  let raccoonFeeling = req.query.movie.like === 'liked' ? raccoon.liked : raccoon.disliked;
+
+  raccoonFeeling(req.query[':userId'], req.query.movie.id).then(() => {
+    raccoon.stat.recommendFor(req.query[':userId'], 15, function(err, recs){
+      console.log('recs', recs);
+      raccoon.stat.mostSimilarUsers(req.query[':userId'], function(simUsers){
+        raccoon.stat.bestRatedWithScores(9, function(bestRated){
+          replyObj = {
+            recommendations: recs,
+            similarUsers: simUsers,
+            bestScores: bestRated
+          };
+          console.log('replyObj', replyObj);
+          res.send(replyObj);
         });
       });
     });
-  } else {
-    raccoon.disliked(req.query[':userId'], req.query.movie.id, function(){
-      raccoon.stat.recommendFor(req.query[':userId'], 15, function(recs){
-        console.log('recs disliked', recs);
-        raccoon.stat.mostSimilarUsers(req.query[':userId'], function(simUsers){
-          raccoon.stat.bestRatedWithScores(9, function(bestRated){
-            replyObj = {
-              recommendations: recs,
-              similarUsers: simUsers,
-              bestScores: bestRated
-            };
-            console.log('replyObj', replyObj);
-            res.send(replyObj);
-          });
-        });
-      });
-    });
-  }
+  });
 });
 
 app.get('/movieLikes', function(req, res){

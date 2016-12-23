@@ -51,14 +51,14 @@ module.exports = exports = (function(){
     User.findOne({name:userName}, function(err, userData){
       Movie.findOne({name:movieName}, function(err, movieData){
         if (rating > 3){
-          raccoon.liked(userData._id, movieData._id, function(){});
+          raccoon.liked(userData._id, movieData._id);
         } else if (rating < 3) {
-          raccoon.disliked(userData._id, movieData._id, function(){});
+          raccoon.disliked(userData._id, movieData._id);
         } else {
           if (function(){return Math.floor(Math.random()*1.5)}===1){
-            raccoon.liked(userData._id, movieData._id, function(){});
+            raccoon.liked(userData._id, movieData._id);
           } else {
-            raccoon.disliked(userData._id, movieData._id, function(){});
+            raccoon.disliked(userData._id, movieData._id);
           }
         }
         // input.userList(userData._id);
