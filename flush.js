@@ -1,5 +1,5 @@
 
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   redis = require('redis');
 
 client = redis.createClient();

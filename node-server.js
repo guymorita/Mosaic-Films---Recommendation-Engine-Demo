@@ -1,9 +1,9 @@
 
-var express = require('express'),
-    raccoon = require('raccoon'),
-    path = require('path'),
-    starter = require('./sampleContent/starter.js'),
-    app = express();
+const express = require('express'),
+  raccoon = require('raccoon'),
+  path = require('path'),
+  starter = require('./sampleContent/starter.js'),
+  app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -14,12 +14,12 @@ app.get('/login', function(req, res){
 });
 
 app.get('/newRating', function(req, res){
-  var replyObj = {};
+  let replyObj = {};
 
   let raccoonFeeling = req.query.movie.like === 'liked' ? raccoon.liked : raccoon.disliked;
 
   raccoonFeeling(req.query[':userId'], req.query.movie.id).then(() => {
-    raccoon.stat.recommendFor(req.query[':userId'], 15, function(err, recs){
+    raccoon.stat.recommendFor(req.query[':userId'], 15, function(recs){
       console.log('recs', recs);
       raccoon.stat.mostSimilarUsers(req.query[':userId'], function(simUsers){
         raccoon.stat.bestRatedWithScores(9, function(bestRated){
@@ -37,7 +37,7 @@ app.get('/newRating', function(req, res){
 });
 
 app.get('/movieLikes', function(req, res){
-  var replyObj = {};
+  let replyObj = {};
   raccoon.stat.likedBy(req.query[':movieId'], function(likes){
     raccoon.stat.dislikedBy(req.query[':movieId'], function(dislikes){
       replyObj = {
@@ -47,11 +47,6 @@ app.get('/movieLikes', function(req, res){
       res.send(replyObj);
     });
   });
-});
-
-app.get('/importMovies', function(req, res){
-  starter.importCSV(starter.importLib);
-  res.send('SUCCESS: Movies Imported');
 });
 
 app.listen(3000, function() {
