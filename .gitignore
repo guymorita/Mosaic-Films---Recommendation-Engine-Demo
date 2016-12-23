@@ -6,3 +6,4 @@ redistest.js
 /build
 binding.gyp
 dump.rdb
+npm-debug.log

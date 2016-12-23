@@ -22,7 +22,7 @@ app.get('/newRating', function(req, res){
     raccoon.stat.recommendFor(req.query[':userId'], 15, function(recs){
       console.log('recs', recs);
       raccoon.stat.mostSimilarUsers(req.query[':userId'], function(simUsers){
-        raccoon.stat.bestRatedWithScores(9, function(bestRated){
+        raccoon.stat.bestRatedWithScores(9).then((bestRated) => {
           replyObj = {
             recommendations: recs,
             similarUsers: simUsers,
