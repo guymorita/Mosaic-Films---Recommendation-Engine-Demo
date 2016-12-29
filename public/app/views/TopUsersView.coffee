@@ -43,7 +43,6 @@ class window.TopUsersView extends Backbone.View
 
 
   reRender: (res) ->
-    console.log(res)
     @$('#similarity').isotope( 'shuffle')
     @$('#disSimilarity').isotope( 'shuffle')
     usersToAdd = _.difference(res.similarUsers.slice(0,5), @oldUsers)

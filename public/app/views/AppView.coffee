@@ -25,10 +25,10 @@ class window.AppView extends Backbone.View
       @$el.html ''
       movieHash = {}
       for index, movie of userObject.allMovies
-        movieHash[movie._id] = movie.name
+        movieHash[movie.id] = movie.name
       userHash = {}
       for index, user of userObject.allUsers
-        userHash[user._id] = user.name
+        userHash[user.id] = user.name
       userObject['movieLookup'] = movieHash
       userObject['userLookup'] = userHash
       _(@model.get('movieList')).extend({userObj: userObject})

@@ -37,11 +37,11 @@ class window.MovieListView extends Backbone.View
   render: ->
     @$el.append @template
     for index, movie of _.shuffle(@model.userObj.allMovies)
-      @$('.table').append '<tr id="'+movie._id+'"><td>
+      @$('.table').append '<tr id="'+movie.id+'"><td>
         '+movie.name+'</td>
         <td>
-        <button type="button" class="liked btn btn-success btn-xs" id="'+movie._id+'"><i class="icon-thumbs-up"></i></button>
-        <button type="button" class="disliked btn btn-danger btn-xs" id="'+movie._id+'"><i class="icon-thumbs-down"></i></button>
-        <button type="button" class="notseen btn btn-warning btn-xs" id="'+movie._id+'"><i class="icon-chevron-right"></i></button>
+        <button type="button" class="liked btn btn-success btn-xs" id="'+movie.id+'"><i class="icon-thumbs-up"></i></button>
+        <button type="button" class="disliked btn btn-danger btn-xs" id="'+movie.id+'"><i class="icon-thumbs-down"></i></button>
+        <button type="button" class="notseen btn btn-warning btn-xs" id="'+movie.id+'"><i class="icon-chevron-right"></i></button>
         </td>
         </tr>'

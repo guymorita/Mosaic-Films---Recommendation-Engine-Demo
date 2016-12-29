@@ -2,7 +2,7 @@
 const express = require('express'),
   raccoon = require('raccoon'),
   path = require('path'),
-  starter = require('./sampleContent/starter.js'),
+  starter = require('./lib/starter.js'),
   app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -28,7 +28,6 @@ app.get('/newRating', function(req, res){
             similarUsers: simUsers,
             bestScores: bestRated
           };
-          console.log('replyObj', replyObj);
           res.send(replyObj);
         });
       });
