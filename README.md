@@ -12,8 +12,8 @@ Video Demo of Mosaic:
 * Async
 * CSV
 * Express
-* MongoDB
-* Mongoose
+* Postgres
+* Sequelize
 * Node
 * Raccoon
 * Redis
@@ -39,26 +39,27 @@ cd Mosaic-Films---Recommendation-Engine-Demo
 npm install
 ```
 
-#### 2a. Install a Redis (if you haven't already)
+#### 2a. Install a Redis (configure if necessary in lib/config.js)
 ``` bash
 brew install redis
 ```
 
-#### 2b. Install Mongo (if you haven't already)
+#### 2b. Install Postgres (configure if necessary in lib/config.js)
 ``` bash
-brew install mongod
+brew install postgres
 ```
-Create the data directory
+Start up postgres server
 ``` bash
-sudo mkdir -p /data/db
+postgres -D /usr/local/var/postgres
 ```
-Give yourself permissions for the /data/db folder
+Create a database
 ``` bash
-whoami
-// your_username
+createdb mosaic
 ```
+
+#### 4. Import Sample Data
 ``` bash
-sudo chown -R <your_username> 755 /data/db
+node lib/importMovies.js
 ```
 
 #### 3. Boot up servers in separate terminal windows
@@ -66,15 +67,11 @@ sudo chown -R <your_username> 755 /data/db
 redis-server
 ```
 ``` bash
-mongod
+postgres -D /usr/local/var/postgres
 ```
 ``` bash
 node node-server.js
 ```
-
-#### 4. Import Movies
-* Go to http://localhost:3000/importMovies
-* Only do this once. Otherwise you'll need to flush the mongo collection because you will have dupes.
 
 #### 5. It's ready! Try the home page
 * http://localhost:3000/
