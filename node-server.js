@@ -1,10 +1,10 @@
-
 const express = require('express'),
   raccoon = require('raccoon'),
   path = require('path'),
   starter = require('./lib/starter.js'),
   app = express();
 
+app.disable('x-powered-by');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login', function(req, res){
