@@ -547,6 +547,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     this.$element
       .removeClass('collapse')
       .addClass('collapsing')
+      .attr('aria-expanded', true) // Add ARIA attribute
       [dimension](0)
 
     this.transitioning = 1
@@ -587,6 +588,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       .addClass('collapsing')
       .removeClass('collapse')
       .removeClass('in')
+      .attr('aria-expanded', false) // Add ARIA attribute
 
     this.transitioning = 1
 

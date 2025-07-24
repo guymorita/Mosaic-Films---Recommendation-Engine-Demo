@@ -1,13 +1,18 @@
-
 const express = require('express'),
   raccoon = require('raccoon'),
   path = require('path'),
   starter = require('./lib/starter.js'),
   app = express();
+const rateLimit = require('express-rate-limit');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/login', function(req, res){
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
+app.get('/login', loginLimiter, function(req, res){
   starter.buildLoginObject(req.query[':username'], function(object){
     res.send(object);
   });
